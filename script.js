@@ -27,6 +27,8 @@ let isEditing = false;
 let editDocId = null;
 let cachedMyData = []; // Store data locally for Dashboard (Restaurant listings OR NGO claims)
 let cachedBrowseData = []; // Store active listings for filtering
+let currentRating = 0;
+let currentRatingDocId = null;
 
 // Filter State
 let currentFilterType = "All";
@@ -453,8 +455,15 @@ window.pickupFood = async function (docId) {
         const docRef = doc(db, "listings", docId);
         await updateDoc(docRef, {
             status: "Completed",
-            completedAt: Date.now()
+            completedAt: Date.now(),
+            rating: null,
+            ratedBy: null,
+            ratedAt: null
         });
+
+        // Open rating popup AFTER pickup
+        openRatingModal(docId);
+
         showCustomAlert("Pickup confirmed! Thank you for reducing waste.");
     } catch (e) {
         console.error("Error updating pickup:", e);
@@ -560,6 +569,15 @@ function renderDashboardItems(data) {
     data.sort((a, b) => b.createdAt - a.createdAt);
 
     data.forEach((item) => {
+        let ratingHtml = "";
+        if (item.rating) {
+            ratingHtml = `
+        <div class="rating-display">
+            ${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}
+        </div>
+    `;
+        }
+
         let badgeClass = item.status === "Active" ? "status-active" : item.status === "Claimed" ? "status-claimed" : "status-completed";
         let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
 
@@ -597,7 +615,8 @@ function renderDashboardItems(data) {
                     <img src="${thumb}" class="list-thumb">
                     <div class="card-info">
                         <span class="restaurant-label">${item.restaurantName}</span>
-                        <h3>${item.title} <span class="status-badge ${badgeClass}">${statusText}</span></h3>
+                        <h3>${item.title}<span class="status-badge ${badgeClass}">${statusText}</span></h3>${ratingHtml}
+
                         <div class="card-meta">
                             <span><i class="fa-regular fa-user"></i> ${item.quantity}</span>
                             <span><i class="fa-regular fa-clock"></i> ${item.pickupTime} (${item.uploadDate})</span>
@@ -964,3 +983,51 @@ window.toggleCreateModal = function (show) {
         }
     }
 }
+
+window.openRatingModal = function (docId) {
+    currentRatingDocId = docId;
+    currentRating = 0;
+
+    document.querySelectorAll("#starContainer i").forEach(star => {
+        star.classList.remove("active");
+    });
+
+    document.getElementById("ratingModal").classList.remove("hidden");
+};
+
+window.closeRatingModal = function () {
+    document.getElementById("ratingModal").classList.add("hidden");
+};
+
+document.addEventListener("click", function (e) {
+    if (e.target.closest("#starContainer i")) {
+        const value = Number(e.target.dataset.value);
+        currentRating = value;
+
+        document.querySelectorAll("#starContainer i").forEach(star => {
+            star.classList.toggle("active", star.dataset.value <= value);
+        });
+    }
+});
+
+window.submitRating = async function () {
+    if (currentRating === 0) {
+        showCustomAlert("Please select stars first");
+        return;
+    }
+
+    try {
+        const docRef = doc(db, "listings", currentRatingDocId);
+        await updateDoc(docRef, {
+            rating: currentRating,
+            ratedBy: currentUser,
+            ratedAt: Date.now()
+        });
+
+        closeRatingModal();
+        showCustomAlert("Thank you for rating the restaurant!");
+    } catch (err) {
+        console.error(err);
+        showCustomAlert("Rating submission failed");
+    }
+};
