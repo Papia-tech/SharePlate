@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
+        /* ========================================= */
         /* === SHARED & GLOBAL STYLES === */
+        /* ========================================= */
         :root {
             --bg-body: #fbfbfb;
             --bg-card: #ffffff;
@@ -27,11 +29,11 @@
             --tag-bg: #ffffff;
         }
 
+        /* Scrollbar */
         html {
             overflow-y: scroll;
         }
 
-         /* For Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -59,10 +61,11 @@
             padding-top: 80px;
         }
 
+        /* Utility */
         .hidden {
             display: none !important;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 10px auto;
@@ -138,19 +141,12 @@
             color: #1a4d2e;
             font-weight: 600;
             font-size: 14px;
+            cursor: pointer;
         }
 
-        .btn-start {
-            background: #1a4d2e;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+        /* ========================================= */
+        /* === HOME SPECIFIC STYLES === */
+        /* ========================================= */
 
         /* === HERO SECTION === */
         .container .view-home {
@@ -197,6 +193,7 @@
             margin-bottom: 15px;
         }
 
+        /* Custom color for specific words */
         .need {
             font-family: 'Merriweather', serif;
             font-size: 38px;
@@ -220,43 +217,6 @@
             margin-bottom: 30px;
         }
 
-        .hero-content .hero-btns {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .hero-content .hero-btns .btn-hero-primary {
-            background: #1a4d2e;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: 10px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .hero-content .hero-btns .btn-hero-secondary {
-            background: white;
-            border: 2px solid #1a4d2e;
-            color: #1a4d2e;
-            font-size: 12px;
-            padding: 10px 18px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        .hero-content .hero-btns .btn-hero-primary:hover {
-            background: #143d24;
-        }
-
-        .hero-content .hero-btns .btn-hero-secondary:hover {
-            background: #f0f7f4;
-        }
-
         .hero-section .hero-image {
             flex: 1;
             height: 360px;
@@ -265,6 +225,7 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
+        /* === STATS BANNER === */
         .stats-banner {
             background: #1a4d2e;
             border-radius: 20px;
@@ -421,12 +382,88 @@
             color: #1a4d2e;
         }
 
+        /* ========================================= */
         /* === DASHBOARD SPECIFIC STYLES === */
-        /* New Rule: Adds spacing only for non-home views */
+        /* ========================================= */
         #view-dashboard,
         #view-browse,
         #view-how {
             margin-top: 40px;
+        }
+        
+        .listing-form {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+        }
+
+        .listing-form h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: #0f2c1f;
+            margin-bottom: 20px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-grid input, 
+        .form-grid textarea, 
+        .form-grid select { 
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+        
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-grid textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus {
+            border-color: var(--primary-green);
+        }
+        
+        .upload-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px dashed #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .upload-wrapper:hover {
+            border-color: var(--primary-green);
+        }
+        
+        .upload-wrapper input {
+            display: none;
+        }
+        
+        .upload-wrapper i {
+            font-size: 20px;
+            color: #888;
+        }
+        
+        .upload-wrapper span {
+            font-size: 14px;
+            color: #666;
         }
 
         .dashboard-header {
@@ -448,40 +485,6 @@
         .dashboard-text p {
             color: #666;
             font-size: 14px;
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 10px;
-        }
-
-        .toggle-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.2s;
-        }
-
-        .toggle-btn.active {
-            background: #1a4d2e;
-            color: white;
-        }
-
-        .toggle-btn.inactive {
-            background: transparent;
-            border: 1px solid #ddd;
-            color: #666;
-        }
-
-        .toggle-btn.inactive:hover {
-            border-color: #1a4d2e;
-            color: #1a4d2e;
         }
 
         .stats-grid {
@@ -529,34 +532,6 @@
             font-weight: 400;
         }
 
-        .action-hero {
-            background: #f0f7f4;
-            border: 2px dashed var(--dashed-border);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .upload-icon {
-            font-size: 32px;
-            color: #2d7a4d;
-            margin-bottom: 15px;
-        }
-
-        .hero-title {
-            font-family: 'Merriweather', serif;
-            font-size: 24px;
-            color: #0f2c1f;
-            margin-bottom: 8px;
-        }
-
-        .hero-sub {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
         .create-btn {
             background: #2d7a4d;
             color: white;
@@ -586,13 +561,25 @@
         .listing-card {
             background: white;
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 20px; 
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
             border: 1px solid #eee;
+        }
+        
+        .list-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .card-info {
+            flex: 1; 
         }
 
         .card-info h3 {
@@ -601,7 +588,16 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .restaurant-label {
+            font-size: 12px;
+            color: #2d7a4d;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
         }
 
         .status-badge {
@@ -625,6 +621,16 @@
             background: var(--completed-pill);
             color: #fff;
         }
+        
+        .status-tag {
+            background: #e6f2ed;
+            color: #2d7a4d;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
 
         .card-meta {
             display: flex;
@@ -632,15 +638,27 @@
             color: #666;
             font-size: 13px;
         }
+        
+        /* Specific adjustments for NGO cards with more details */
+        .ngo-card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 20px;
+            font-size: 13px;
+            color: #555;
+            margin-top: 5px;
+        }
 
-        .card-meta span {
+        .card-meta span, .ngo-detail-item {
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .card-meta i {
+        .card-meta i, .ngo-detail-item i {
             color: #888;
+            width: 16px; /* Align icons */
+            text-align: center;
         }
 
         .card-actions {
@@ -659,94 +677,33 @@
         }
 
         .btn-edit {
-            background: white;
+            background: #fff;
             border: 1px solid #1a4d2e;
             color: #1a4d2e;
         }
-
-        .btn-view {
-            background: #10b981;
-            color: white;
+        
+        .btn-edit:hover {
+            background: #f0f7f4;
         }
 
         .btn-cancel {
             background: #dc2626;
             color: white;
         }
-
-        .btn-details {
-            background: transparent;
-            color: #1a4d2e;
-            font-weight: 600;
-            font-size: 13px;
+        
+        /* Pick Up Button Style */
+        .btn-complete {
+             background: #10b981;
+             color: white;
+        }
+        
+        .btn-complete:hover {
+            background: #0d9668;
         }
 
-        .btn-details:hover {
-            text-decoration: underline;
-        }
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .modal-content {
-            background: white;
-            width: 450px;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-content h3 {
-            font-family: 'Merriweather';
-            margin-bottom: 20px;
-            color: #1a4d2e;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .modal-content input:focus {
-            border-color: #2d7a4d;
-        }
-
-        .modal-save {
-            width: 48%;
-            background: #2d7a4d;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-right: 2%;
-        }
-
-        .modal-close {
-            width: 48%;
-            background: #f3f4f6;
-            color: #333;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
+        /* ========================================= */
         /* === HOW IT WORKS SPECIFIC STYLES === */
+        /* ========================================= */
         .hiw-hero {
             text-align: center;
             margin-bottom: 60px;
@@ -906,7 +863,9 @@
             line-height: 1.5;
         }
 
+        /* ========================================= */
         /* === BROWSE FOOD SPECIFIC STYLES === */
+        /* ========================================= */
         .browse-hero {
             margin-bottom: 40px;
         }
@@ -1125,7 +1084,7 @@
             background: #1e5c38;
         }
 
-        /* Responsive */
+        /* Mobile Responsive */
         @media (max-width: 900px) {
 
             .hero-section {
@@ -1157,8 +1116,13 @@
                 display: none;
             }
 
+            /* Simplified header for mobile */
             .logo {
                 font-size: 18px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1174,13 +1138,12 @@
         <nav class="nav-links">
             <div id="nav-home" class="nav-item active" onclick="showView('home')">Home</div>
             <div id="nav-dashboard" class="nav-item" onclick="showView('dashboard')">Dashboard</div>
-            <div id="nav-browse" class="nav-item" onclick="showView('browse')">Browse Food</div>
+            <div id="nav-browse" class="nav-item hide-for-restaurant" onclick="showView('browse')">Browse Food</div>
             <div id="nav-how" class="nav-item" onclick="showView('how')">How it Works</div>
         </nav>
 
         <div class="header-actions">
-            <a href="login.html" class="btn-signin" onclick="logout()">Sign Out</a>
-            <button class="btn-start" onclick="window.location.href='login.html'">Get Started</button>
+            <a onclick="logout()" class="btn-signin">Sign Out</a>
         </div>
     </header>
 
@@ -1194,10 +1157,6 @@
                     <p class="hero-sub">A real-time platform that connects restaurants with surplus food to nearby NGOs
                         to
                         reduce waste and fight hunger effectively.</p>
-                    <div class="hero-btns">
-                        <a href="login.html" class="btn-hero-primary">I'm a Restaurant</a>
-                        <a href="login.html" class="btn-hero-secondary">I'm an NGO</a>
-                    </div>
                 </div>
                 <div class="hero-image"></div>
             </div>
@@ -1284,85 +1243,104 @@
         <div id="view-dashboard" class="hidden">
             <div class="dashboard-header">
                 <div class="dashboard-text">
-                    <h1>Dashboard</h1>
+                    <h1 id="dashboard-title-text">Dashboard</h1>
                     <p id="dashboard-subtitle">Manage your food listings and track your impact.</p>
                 </div>
-                <div class="view-toggle">
-                    <button id="btn-restaurant" class="toggle-btn active" onclick="switchDashView('restaurant')">
-                        <i class="fa-solid fa-store"></i> Restaurant View
+            </div>
+
+            <div id="dashboard-restaurant-content">
+                <div id="stats-restaurant" class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Active Listings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-regular fa-bell"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Pending Claims</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-regular fa-circle-check"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-regular fa-heart"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Meals Shared</div>
+                    </div>
+                </div>
+
+                <div class="listing-form">
+                    <h2>Create Food Listing</h2>
+                    <div class="form-grid">
+                        <input type="text" id="restaurant-name" placeholder="Restaurant Name">
+                        <input type="text" id="restaurant-phone" placeholder="Phone Number">
+                        
+                        <input type="text" id="dish-name" placeholder="Food Name (e.g., Lunch Buffet)">
+                        <input type="number" id="portions-available" placeholder="Portions Available">
+                        
+                        <select id="food-type">
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Non-Veg">Non-Veg</option>
+                            <option value="Vegan">Vegan</option>
+                        </select>
+                        
+                        <input type="text" id="pickup-hours" placeholder="Pickup Hours (e.g., 2:00 PM - 4:00 PM)">
+                        
+                        <label class="upload-wrapper" for="food-image-upload">
+                            <i class="fa-solid fa-camera"></i>
+                            <span id="file-name-display">Upload Food Image (Optional)</span>
+                            <input type="file" id="food-image-upload" accept="image/*" onchange="updateFileName(this)">
+                        </label>
+                        
+                        <input type="text" id="restaurant-address" placeholder="Restaurant Address" class="form-group-full">
+                        <textarea id="food-description" placeholder="Food Description" class="form-group-full"></textarea>
+                    </div>
+                    <button class="create-btn" style="margin-top: 20px;" onclick="addPost()">
+                        <i class="fa-solid fa-plus"></i> Post New Listing
                     </button>
-                    <button id="btn-ngo" class="toggle-btn inactive" onclick="switchDashView('ngo')">
-                        <i class="fa-regular fa-heart"></i> NGO View
+                    <button class="action-btn btn-cancel hidden" id="cancel-edit-btn" style="margin-top: 20px; margin-left:10px;" onclick="cancelEdit()">
+                        Cancel Edit
                     </button>
                 </div>
-            </div>
 
-            <div id="stats-restaurant" class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Active Listings</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-regular fa-bell"></i></div>
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Pending Claims</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-regular fa-circle-check"></i></div>
-                    <div class="stat-number">47</div>
-                    <div class="stat-label">Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-regular fa-heart"></i></div>
-                    <div class="stat-number">2.3K</div>
-                    <div class="stat-label">Meals Shared</div>
+                <h2 class="section-title">My Active Listings</h2>
+                <div id="listingContainer">
+                    <p>No listings yet. Use the form above to create one!</p>
                 </div>
             </div>
 
-            <div id="stats-ngo" class="stats-grid hidden">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-regular fa-clock"></i></div>
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Scheduled Pickups</div>
+            <div id="dashboard-ngo-content" class="hidden">
+                <div id="stats-ngo" class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-regular fa-clock"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Scheduled Pickups</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-check-double"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Total Claimed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Meals Distributed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-people-group"></i></div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Partner Restaurants</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-solid fa-check-double"></i></div>
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Total Claimed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="stat-number">850</div>
-                    <div class="stat-label">Meals Distributed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fa-solid fa-people-group"></i></div>
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Partner Restaurants</div>
+                
+                <h2 class="section-title">My Claims</h2>
+                <div id="claimsContainer">
+                    <p>You have no active claims. Browse available food to claim items!</p>
                 </div>
             </div>
-
-            <div id="hero-restaurant" class="action-hero">
-                <div class="upload-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
-                <h2 class="hero-title">Add New Food Listing</h2>
-                <p class="hero-sub">Have surplus food? List it now and connect with NGOs in your area.</p>
-                <button class="create-btn" onclick="openModal()">
-                    <i class="fa-solid fa-plus"></i> Create Listing
-                </button>
-            </div>
-
-            <div id="hero-ngo" class="action-hero hidden">
-                <div class="upload-icon"><i class="fa-solid fa-map-location-dot"></i></div>
-                <h2 class="hero-title">Find Food Near You</h2>
-                <p class="hero-sub">Browse available surplus food from restaurants in your area.</p>
-                <button class="create-btn" onclick="showView('browse')">
-                    <i class="fa-solid fa-magnifying-glass"></i> Browse Available Food
-                </button>
-            </div>
-
-            <h2 class="section-title" id="list-title">My Listings</h2>
-            <div id="listingContainer"></div>
         </div>
 
         <div id="view-browse" class="hidden">
@@ -1375,7 +1353,7 @@
                 <div class="search-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="searchInput" class="search-input"
-                        placeholder="Search restaurants or food name...">
+                        placeholder="Search restaurants or food name..." onkeyup="filterBrowse()">
                 </div>
 
                 <div class="filters">
@@ -1396,8 +1374,8 @@
                 <h1>Making Food Sharing Simple</h1>
                 <p>Whether you have food to give or mouths to feed, SharePlate connects you in three simple steps.</p>
             </div>
-
-            <div class="role-toggle-container">
+            
+            <div class="role-toggle-container" id="hiw-toggle-container">
                 <div class="toggle-bg">
                     <button id="hiw-btn-rest" class="hiw-toggle-btn active" onclick="setHiwRole('restaurant')">For
                         Restaurants</button>
@@ -1479,245 +1457,538 @@
 
     </div>
 
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <h3>Create New Listing</h3>
-            <input type="text" id="dish" placeholder="Dish Title (e.g. Lunch Buffet)">
-            <input type="text" id="qty" placeholder="Quantity (e.g. ~60 portions)">
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="time" placeholder="Time limit (e.g. 3 hours)">
-                <input type="text" id="date" placeholder="Date/Time (e.g. Today 2:30 PM)">
-            </div>
-            <div style="margin-top:10px;">
-                <button class="modal-save" onclick="addPost()">Post Listing</button>
-                <button class="modal-close" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
+<script type="module">
+    // 1. IMPORT FIREBASE FUNCTIONS
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, updateDoc, onSnapshot, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<script>
-        // === GLOBAL NAVIGATION LOGIC ===
-        function showView(viewId) {
+    // 2. YOUR CONFIGURATION
+    const firebaseConfig = {
+        apiKey: "AIzaSyCaC0u5W3JG1Wmo0FAMmHTOYVrR0KUf8Mw",
+        authDomain: "shareplate-free.firebaseapp.com",
+        projectId: "shareplate-free",
+        messagingSenderId: "407885827230",
+        appId: "1:407885827230:web:a9996e34dde6de896cff8f",
+        measurementId: "G-QSDJ5NGNTZ"
+    };
 
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-dashboard').classList.add('hidden');
-            document.getElementById('view-browse').classList.add('hidden');
-            document.getElementById('view-how').classList.add('hidden');
+    // 3. INITIALIZE APP & DATABASE
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const listingsRef = collection(db, "listings");
 
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            document.getElementById('nav-' + viewId).classList.add('active');
-        }
-
-        function logout() {
-            localStorage.removeItem("loggedIn");
-            localStorage.removeItem("loggedInUser");
-        }
-
-        // FAQ Toggle Logic
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const parent = item.parentElement;
-                parent.classList.toggle('active');
-            });
-        });
-
-        function logout() {
-            localStorage.removeItem("loggedIn");
-            localStorage.removeItem("loggedInUser");
-        }
-
-        // === DASHBOARD LOGIC ===
-        let currentDashView = 'restaurant';
-        let restaurantListings = [
-            { title: "Lunch Buffet Items", status: "Active", meta1: "~60 portions", meta2: "2 claims", meta3: "3 hours", meta4: "Today, 2:30 PM", icons: ["fa-user", "fa-bell", "fa-clock", "fa-calendar"] },
-            { title: "Breakfast Pastries", status: "Claimed", meta1: "~25 pieces", meta2: "1 claims", meta3: "1 hour", meta4: "Today, 10:00 AM", icons: ["fa-user", "fa-bell", "fa-clock", "fa-calendar"] },
-            { title: "Dinner Service Surplus", status: "Completed", meta1: "~80 portions", meta2: "3 claims", meta3: "Completed", meta4: "Yesterday, 9:00 PM", icons: ["fa-user", "fa-bell", "fa-clock", "fa-calendar"] }
-        ];
-
-        let ngoClaims = [
-            { title: "Fresh Salads & Wraps", status: "Scheduled", meta1: "Green Garden Cafe", meta2: "~30 portions", meta3: "1.2 km", meta4: "Today, 2:00 PM", icons: ["fa-store", "fa-user", "fa-location-dot", "fa-clock"] },
-            { title: "Buffet Surplus (Rice/Curry)", status: "Scheduled", meta1: "Taj Mahal Palace", meta2: "~50 portions", meta3: "3.5 km", meta4: "Today, 3:30 PM", icons: ["fa-store", "fa-user", "fa-location-dot", "fa-clock"] },
-            { title: "Bakery Items", status: "Completed", meta1: "Sweet Tooth Bakery", meta2: "~20 pieces", meta3: "0.8 km", meta4: "Yesterday", icons: ["fa-store", "fa-user", "fa-location-dot", "fa-clock"] }
-        ];
-
-        function switchDashView(view) {
-            currentDashView = view;
-            const btnRest = document.getElementById("btn-restaurant");
-            const btnNgo = document.getElementById("btn-ngo");
-
-            if (view === 'restaurant') {
-                btnRest.classList.add("active"); btnRest.classList.remove("inactive");
-                btnNgo.classList.remove("active"); btnNgo.classList.add("inactive");
-                document.getElementById("stats-restaurant").classList.remove("hidden");
-                document.getElementById("stats-ngo").classList.add("hidden");
-                document.getElementById("hero-restaurant").classList.remove("hidden");
-                document.getElementById("hero-ngo").classList.add("hidden");
-                document.getElementById("list-title").textContent = "My Listings";
-                document.getElementById("dashboard-subtitle").textContent = "Manage your food listings and track your impact.";
-            } else {
-                btnRest.classList.remove("active"); btnRest.classList.add("inactive");
-                btnNgo.classList.add("active"); btnNgo.classList.remove("inactive");
-                document.getElementById("stats-restaurant").classList.add("hidden");
-                document.getElementById("stats-ngo").classList.remove("hidden");
-                document.getElementById("hero-restaurant").classList.add("hidden");
-                document.getElementById("hero-ngo").classList.remove("hidden");
-                document.getElementById("list-title").textContent = "My Claims";
-                document.getElementById("dashboard-subtitle").textContent = "Track your claims, pickups, and community impact.";
-            }
-            renderItems();
-        }
-
-        function renderItems() {
-            const container = document.getElementById("listingContainer");
-            container.innerHTML = "";
-            const data = currentDashView === 'restaurant' ? restaurantListings : ngoClaims;
-
-            data.forEach((item, index) => {
-                let badgeClass = "";
-                if (item.status === "Active" || item.status === "Scheduled") badgeClass = "status-active";
-                else if (item.status === "Claimed") badgeClass = "status-claimed";
-                else badgeClass = "status-completed";
-
-                let buttonsHtml = "";
-                if (currentDashView === 'restaurant') {
-                    if (item.status === "Active") buttonsHtml = `<button class="action-btn btn-edit">Edit</button> <button class="action-btn btn-cancel" onclick="deletePost(${index})">Cancel</button>`;
-                    else if (item.status === "Claimed") buttonsHtml = `<button class="action-btn btn-view">View Claims</button>`;
-                    else buttonsHtml = `<button class="action-btn btn-details">View Details</button>`;
-                } else {
-                    if (item.status === "Scheduled") buttonsHtml = `<button class="action-btn btn-edit" onclick="window.location.href='pickup_tracking.html'">Track Pickup</button> <button class="action-btn btn-view">Confirm</button>`;
-                    else buttonsHtml = `<button class="action-btn btn-details">View Details</button>`;
-                }
-
-                container.innerHTML += `
-                    <div class="listing-card">
-                        <div class="card-info">
-                            <h3>${item.title} <span class="status-badge ${badgeClass}">${item.status}</span></h3>
-                            <div class="card-meta">
-                                <span><i class="fa-regular ${item.icons[0]}"></i> ${item.meta1}</span>
-                                <span><i class="fa-regular ${item.icons[1]}"></i> ${item.meta2}</span>
-                                <span><i class="fa-regular ${item.icons[2]}"></i> ${item.meta3}</span>
-                                <span><i class="fa-regular ${item.icons[3]}"></i> ${item.meta4}</span>
-                            </div>
-                        </div>
-                        <div class="card-actions">${buttonsHtml}</div>
-                    </div>`;
-            });
-        }
-
-        function openModal() { document.getElementById("modal").style.display = "flex"; }
-        function closeModal() { document.getElementById("modal").style.display = "none"; }
-
-        function addPost() {
-            const title = document.getElementById("dish").value;
-            const qty = document.getElementById("qty").value;
-            const time = document.getElementById("time").value;
-            if (title && qty) {
-                restaurantListings.unshift({ title: title, status: "Active", meta1: qty, meta2: "0 claims", meta3: time || "2 hours", meta4: "Just now", icons: ["fa-user", "fa-bell", "fa-clock", "fa-calendar"] });
-                renderItems();
-                closeModal();
-            }
-        }
-        function deletePost(index) {
-            if (confirm("Cancel this listing?")) { restaurantListings.splice(index, 1); renderItems(); }
-        }
-
-        // === BROWSE FOOD LOGIC ===
-        const foodData = [
-            { img: "food.jpg", restaurant: "Taj Mahal Palace", title: "Buffet Leftovers", desc: "Mixed vegetarian and non-vegetarian items from lunch buffet.", tags: ["Vegetarian", "Non-Veg"], portions: "~50 portions", distance: "2.3 km", time: "2 hours" },
-            { img: "food1.jpg", restaurant: "Green Garden Cafe", title: "Fresh Salads & Sandwiches", desc: "Assorted fresh salads, whole grain sandwiches.", tags: ["Vegetarian", "Vegan"], portions: "~30 portions", distance: "1.5 km", time: "4 hours" },
-            { img: "food2.jpg", restaurant: "City Hostel Kitchen", title: "Cooked Rice & Curry", desc: "Plain rice, vegetable curry, and dal.", tags: ["Vegetarian"], portions: "~100 portions", distance: "3.8 km", time: "3 hours" },
-            { img: "food3.jpg", restaurant: "Olive Bistro", title: "Pasta & Garlic Bread", desc: "Surplus pasta trays (Arrabbiata and Alfredo).", tags: ["Vegetarian"], portions: "~20 portions", distance: "4.2 km", time: "1.5 hours" },
-            { img: "food4.jpg", restaurant: "Burger Point", title: "Burger Buns & Patties", desc: "Uncooked surplus burger patties and fresh bun packets.", tags: ["Non-Veg"], portions: "~40 portions", distance: "5.0 km", time: "5 hours" },
-            { img: "food5.jpg", restaurant: "Sweet Tooth Bakery", title: "Assorted Pastries", desc: "End of day sale leftovers: muffins, croissants.", tags: ["Vegetarian", "Dessert"], portions: "~15 portions", distance: "1.0 km", time: "1 hour" }
-        ];
-
-        let currentFilter = 'All';
-        let currentSearch = '';
-
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            currentSearch = e.target.value.toLowerCase();
-            renderCards();
-        });
-
-        function setFilter(filterType, btnElement) {
-            currentFilter = filterType;
-            document.querySelectorAll('.filter-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.add('inactive'); });
-            btnElement.classList.remove('inactive'); btnElement.classList.add('active');
-            renderCards();
-        }
-
-        function renderCards() {
-            const grid = document.getElementById("foodGrid");
-            grid.innerHTML = "";
-            const filteredData = foodData.filter(item => {
-                const matchesFilter = currentFilter === 'All' || item.tags.includes(currentFilter);
-                const matchesSearch = item.title.toLowerCase().includes(currentSearch) || item.restaurant.toLowerCase().includes(currentSearch);
-                return matchesFilter && matchesSearch;
-            });
-
-            document.getElementById("count").textContent = filteredData.length;
-            if (filteredData.length === 0) { grid.innerHTML = `<div class="no-results">No listings match your search criteria.</div>`; return; }
-
-            filteredData.forEach(item => {
-                let tagsHtml = item.tags.map(tag => {
-                    let icon = tag === "Vegetarian" || tag === "Vegan" ? '<i class="fa-solid fa-leaf" style="color:green"></i>' : tag === "Non-Veg" ? '<i class="fa-solid fa-drumstick-bite" style="color:brown"></i>' : '';
-                    return `<span class="tag">${icon} ${tag}</span>`;
-                }).join("");
-
-                grid.innerHTML += `
-                    <div class="food-card">
-                        <div class="card-img-container"><img src="${item.img}" class="card-img" alt="${item.title}"><div class="card-tags">${tagsHtml}</div></div>
-                        <div class="card-content">
-                            <div class="restaurant-name">${item.restaurant}</div>
-                            <h3 class="dish-title">${item.title}</h3>
-                            <p class="dish-desc">${item.desc}</p>
-                            <div class="meta-row">
-                                <div class="meta-item"><i class="fa-regular fa-user"></i> ${item.portions}</div>
-                                <div class="meta-item"><i class="fa-solid fa-location-dot"></i> ${item.distance}</div>
-                                <div class="meta-item time"><i class="fa-regular fa-clock"></i> ${item.time}</div>
-                            </div>
-                            <button class="btn-claim">Claim This Food</button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        // === HOW IT WORKS LOGIC ===
-        function setHiwRole(role) {
-            const btnRest = document.getElementById('hiw-btn-rest');
-            const btnNgo = document.getElementById('hiw-btn-ngo');
-            const flowRest = document.getElementById('hiw-flow-restaurant');
-            const flowNgo = document.getElementById('hiw-flow-ngo');
-
-            if (role === 'restaurant') {
-                btnRest.classList.add('active'); btnRest.classList.remove('inactive');
-                btnNgo.classList.add('inactive'); btnNgo.classList.remove('active');
-                flowRest.classList.remove('hidden'); flowNgo.classList.add('hidden');
-            } else {
-                btnRest.classList.add('inactive'); btnRest.classList.remove('active');
-                btnNgo.classList.add('active'); btnNgo.classList.remove('inactive');
-                flowRest.classList.add('hidden'); flowNgo.classList.remove('hidden');
-            }
-        }
-
-        window.onload = function () {
-            renderItems();
-            renderCards();
-        };
-
-    </script>
-    <script>
-    // 1. Check if user is logged in
+    // CHECK LOGIN STATUS
     const isLoggedIn = localStorage.getItem("loggedIn");
+    const currentUser = localStorage.getItem("loggedInUser"); // Used to filter "My Listings"
+    const userRole = localStorage.getItem("loggedInRole");
 
-    // 2. If NOT logged in, redirect to login page
+    // Edit State Variables
+    let isEditing = false;
+    let editDocId = null;
+    let cachedMyData = []; // Store data locally to find it for editing
+    let cachedBrowseData = []; // Store active listings for filtering
+
+    // Filter State
+    let currentFilterType = "All";
+
     if (!isLoggedIn) {
-        const currentUrl = encodeURIComponent(window.location.href);
-        window.location.href = "login.html?returnUrl=" + currentUrl;
+        window.location.href = "login.html";
     }
-    </script>
+
+    // =========================================
+    // === 4. HELPER: CONVERT IMAGE TO STRING ===
+    // =========================================
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+    
+    // =========================================
+    // === UI HELPER: SHOW FILENAME ON SELECT ===
+    // =========================================
+    window.updateFileName = function(input) {
+        const display = document.getElementById("file-name-display");
+        if (input.files && input.files.length > 0) {
+            display.textContent = input.files[0].name; // Show the filename
+            display.style.color = "#2d7a4d"; // Turn text green
+            display.style.fontWeight = "600";
+        } else {
+            display.textContent = "Upload Food Image (Optional)";
+            display.style.color = "#666";
+        }
+    }
+
+    // =========================================
+    // === 5. ADD / UPDATE LISTING FUNCTION ===
+    // =========================================
+    window.addPost = async function() {
+        const title = document.getElementById("dish-name").value;
+        const qty = document.getElementById("portions-available").value;
+        const restName = document.getElementById("restaurant-name").value;
+        const restPhone = document.getElementById("restaurant-phone").value; // Added phone capture
+        const restAddr = document.getElementById("restaurant-address").value;
+        const pickupHours = document.getElementById("pickup-hours").value;
+        const desc = document.getElementById("food-description").value;
+        const type = document.getElementById("food-type").value; // Get the selected type
+        const fileInput = document.getElementById("food-image-upload");
+
+        // Basic Validation
+        if (!title || !qty || !restName) {
+            alert("Please fill in the required fields (Name, Quantity, Restaurant Name).");
+            return;
+        }
+
+        const createBtn = document.querySelector('#dashboard-restaurant-content .create-btn');
+        const originalBtnText = isEditing ? "Update Listing" : "Post New Listing";
+        createBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+        createBtn.disabled = true;
+
+        try {
+            let imageString = ""; 
+
+            // CONVERT IMAGE TO STRING
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                if (file.size > 800 * 1024) { 
+                    alert("Image is too large! Please use images under 800KB.");
+                    createBtn.innerHTML = originalBtnText;
+                    createBtn.disabled = false;
+                    return;
+                }
+                imageString = await convertBase64(file);
+            }
+
+            const dataPayload = {
+                title: title,
+                quantity: qty,
+                pickupTime: pickupHours || "2 hours",
+                dateTime: new Date().toISOString().split('T')[0],
+                status: "Active",
+                tags: [type], // Use the selected type
+                restaurantName: restName,
+                restaurantPhone: restPhone, // Save phone number
+                restaurantAddress: restAddr,
+                description: desc,
+                createdBy: currentUser,
+                createdAt: Date.now()
+            };
+            
+            // Only update image if a new one was uploaded
+            if(imageString) {
+                dataPayload.imageUrl = imageString;
+            }
+
+            if (isEditing && editDocId) {
+                // UPDATE EXISTING DOC
+                const docRef = doc(db, "listings", editDocId);
+                await updateDoc(docRef, dataPayload);
+                alert("Listing updated successfully!");
+                cancelEdit(); // Reset form
+            } else {
+                // CREATE NEW DOC
+                if(!imageString) dataPayload.imageUrl = ""; // Ensure field exists
+                await addDoc(listingsRef, dataPayload);
+                alert("Listing posted successfully!");
+                clearForm();
+            }
+
+        } catch (e) {
+            console.error("Error adding/updating document: ", e);
+            alert("Error: " + e.message);
+        } finally {
+            if(!isEditing) createBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Post New Listing';
+            createBtn.disabled = false;
+        }
+    }
+    
+    // Helper to clear form
+    function clearForm() {
+        document.getElementById("dish-name").value = '';
+        document.getElementById("portions-available").value = '';
+        document.getElementById("restaurant-name").value = '';
+        document.getElementById("restaurant-phone").value = '';
+        document.getElementById("restaurant-address").value = '';
+        document.getElementById("food-description").value = '';
+        document.getElementById("pickup-hours").value = '';
+        document.getElementById("food-image-upload").value = ''; 
+        
+        const display = document.getElementById("file-name-display");
+        display.textContent = "Upload Food Image (Optional)";
+        display.style.color = "#666";
+    }
+
+    // =========================================
+    // === EDITING FUNCTIONS ===
+    // =========================================
+    window.editPost = function(id) {
+        const item = cachedMyData.find(i => i.id === id);
+        if(!item) return;
+
+        // Populate fields
+        document.getElementById("restaurant-name").value = item.restaurantName;
+        document.getElementById("restaurant-phone").value = item.restaurantPhone || '';
+        document.getElementById("dish-name").value = item.title;
+        document.getElementById("portions-available").value = item.quantity;
+        document.getElementById("food-type").value = item.tags ? item.tags[0] : 'Vegetarian';
+        document.getElementById("pickup-hours").value = item.pickupTime;
+        document.getElementById("restaurant-address").value = item.restaurantAddress;
+        document.getElementById("food-description").value = item.description || '';
+
+        // Set Edit Mode
+        isEditing = true;
+        editDocId = id;
+        
+        // Update Buttons
+        const createBtn = document.querySelector('.create-btn');
+        createBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Listing';
+        document.getElementById('cancel-edit-btn').classList.remove('hidden');
+        
+        // Scroll to form
+        document.querySelector('.listing-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    window.cancelEdit = function() {
+        isEditing = false;
+        editDocId = null;
+        clearForm();
+        
+        const createBtn = document.querySelector('.create-btn');
+        createBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Post New Listing';
+        document.getElementById('cancel-edit-btn').classList.add('hidden');
+    }
+    
+    // =========================================
+    // === NGO CLAIM & PICKUP FUNCTIONALITY ===
+    // =========================================
+    window.claimFood = async function(docId) {
+        if(!confirm("Are you sure you want to claim this food?")) return;
+        
+        try {
+            const docRef = doc(db, "listings", docId);
+            await updateDoc(docRef, {
+                status: "Claimed",
+                claimedBy: currentUser,
+                claimedAt: Date.now()
+            });
+            alert("Food claimed successfully! Check your Dashboard.");
+            window.showView('dashboard'); // Redirect to dashboard
+        } catch(e) {
+            console.error("Error claiming:", e);
+            alert("Error: " + e.message);
+        }
+    }
+    
+    // NEW: PICK UP FUNCTION
+    window.pickupFood = async function(docId) {
+        if(!confirm("Confirm pickup? This will mark the food as distributed.")) return;
+        
+        try {
+            const docRef = doc(db, "listings", docId);
+            await updateDoc(docRef, {
+                status: "Completed",
+                completedAt: Date.now()
+            });
+            alert("Pickup confirmed! Thank you for reducing waste.");
+        } catch(e) {
+            console.error("Error updating pickup:", e);
+            alert(e.message);
+        }
+    }
+
+    // =========================================
+    // === 6. DATA LISTENERS (Real-Time Updates) ===
+    // =========================================
+    
+    // LISTENER 1: DASHBOARD (Role Based)
+    if (userRole === 'Restaurant') {
+        const myQuery = query(listingsRef, where("createdBy", "==", currentUser));
+        onSnapshot(myQuery, (snapshot) => {
+            const myData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            cachedMyData = myData; // Save for editing
+            renderDashboardItems(myData);
+            updateDashboardStats(myData);
+        });
+    } else if (userRole === 'NGO') {
+        // Listener for Claims made by this NGO
+        const ngoQuery = query(listingsRef, where("claimedBy", "==", currentUser));
+        onSnapshot(ngoQuery, (snapshot) => {
+            const myClaims = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            renderNgoClaims(myClaims);
+            updateNgoStats(myClaims);
+        });
+    }
+
+    // LISTENER 2: BROWSE PAGE (Shows ALL Active listings)
+    const browseQuery = query(listingsRef, where("status", "==", "Active"));
+    onSnapshot(browseQuery, (snapshot) => {
+        const allActiveData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        cachedBrowseData = allActiveData; // Cache for Search/Filter
+        filterBrowse(); 
+    });
+
+    // =========================================
+    // === 7. FILTER & SEARCH LOGIC ===
+    // =========================================
+    window.setFilter = function(filterType, btnElement) {
+        currentFilterType = filterType;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.add('inactive');
+        });
+        btnElement.classList.remove('inactive');
+        btnElement.classList.add('active');
+        filterBrowse();
+    }
+    
+    window.filterBrowse = function() {
+        const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+        
+        const filteredData = cachedBrowseData.filter(item => {
+            const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.restaurantName.toLowerCase().includes(searchTerm);
+            let matchesFilter = true;
+            if (currentFilterType !== "All") {
+                matchesFilter = item.tags && item.tags.includes(currentFilterType);
+            }
+            return matchesSearch && matchesFilter;
+        });
+        renderBrowseCards(filteredData);
+    }
+
+    // =========================================
+    // === 8. RENDER FUNCTIONS ===
+    // =========================================
+    function renderDashboardItems(data) {
+        const container = document.getElementById("listingContainer");
+        if (!container) return;
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+            container.innerHTML = "<p>No active listings yet. Create one above!</p>";
+            return;
+        }
+
+        data.sort((a, b) => b.createdAt - a.createdAt);
+
+        data.forEach((item) => {
+            let badgeClass = item.status === "Active" ? "status-active" : item.status === "Claimed" ? "status-claimed" : "status-completed";
+            let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
+            
+            // MODIFIED: Show "Claimed & Picked Up" text if completed
+            let statusText = item.status;
+            if(item.status === "Completed") statusText = "Claimed & Picked Up";
+
+            container.innerHTML += `
+                <div class="listing-card">
+                    <img src="${thumb}" class="list-thumb">
+                    <div class="card-info">
+                        <span class="restaurant-label">${item.restaurantName}</span>
+                        <h3>${item.title} <span class="status-badge ${badgeClass}">${statusText}</span></h3>
+                        <div class="card-meta">
+                            <span><i class="fa-regular fa-user"></i> ${item.quantity}</span>
+                            <span><i class="fa-regular fa-clock"></i> ${item.pickupTime}</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-btn btn-edit" onclick="editPost('${item.id}')">Edit</button>
+                        <button class="action-btn btn-cancel" onclick="deletePost('${item.id}')">Delete</button>
+                    </div>
+                </div>`;
+        });
+    }
+    
+    // NEW: Render NGO Claims with Details
+    function renderNgoClaims(data) {
+        const container = document.getElementById("claimsContainer");
+        if (!container) return;
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+            container.innerHTML = "<p>You have no active claims. Browse available food to claim items!</p>";
+            return;
+        }
+
+        data.sort((a, b) => b.claimedAt - a.claimedAt);
+
+        data.forEach((item) => {
+            let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
+            let vegBadge = item.tags ? `<span class="status-tag">${item.tags[0]}</span>` : '';
+            let phone = item.restaurantPhone || "N/A";
+
+            // Determine buttons based on status
+            let actionButtons = '';
+            if(item.status === 'Claimed') {
+                actionButtons = `
+                    <button class="action-btn btn-complete" onclick="pickupFood('${item.id}')">Pick Up</button>
+                    <button class="action-btn btn-cancel" onclick="deletePost('${item.id}')">Cancel</button>
+                `;
+            } else {
+                actionButtons = `<span class="status-badge status-completed">Completed</span>`;
+            }
+
+            container.innerHTML += `
+                <div class="listing-card">
+                    <img src="${thumb}" class="list-thumb">
+                    <div class="card-info">
+                        <h3>${item.title} ${vegBadge}</h3>
+                        
+                        <div class="ngo-card-details">
+                            <div class="ngo-detail-item"><i class="fa-solid fa-store"></i> ${item.restaurantName}</div>
+                            <div class="ngo-detail-item"><i class="fa-solid fa-phone"></i> ${phone}</div>
+                            <div class="ngo-detail-item"><i class="fa-solid fa-location-dot"></i> ${item.restaurantAddress}</div>
+                            <div class="ngo-detail-item"><i class="fa-solid fa-bowl-food"></i> Qty: ${item.quantity}</div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                         ${actionButtons}
+                    </div>
+                </div>`;
+        });
+    }
+
+    function renderBrowseCards(data) {
+        const grid = document.getElementById("foodGrid");
+        const countSpan = document.getElementById("count");
+        if (!grid) return;
+
+        if (countSpan) countSpan.innerText = data.length;
+        grid.innerHTML = "";
+
+        if (data.length === 0) {
+            grid.innerHTML = `<div class="no-results">No listings match your search.</div>`;
+            return;
+        }
+
+        data.forEach(item => {
+            const displayImg = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500";
+            let tagsHtml = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("");
+
+            grid.innerHTML += `
+                <div class="food-card">
+                    <div class="card-img-container">
+                        <img src="${displayImg}" class="card-img"> 
+                        <div class="card-tags">${tagsHtml}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="restaurant-name">${item.restaurantName}</div>
+                        <h3 class="dish-title">${item.title}</h3>
+                        <p class="dish-desc">${item.description || 'Freshly prepared surplus food.'}</p>
+                        <div class="meta-row">
+                            <div class="meta-item"><i class="fa-regular fa-user"></i> ${item.quantity}</div>
+                            <div class="meta-item time"><i class="fa-regular fa-clock"></i> ${item.pickupTime}</div>
+                        </div>
+                        <button class="btn-claim" onclick="claimFood('${item.id}')">Claim This Food</button>
+                    </div>
+                </div>`;
+        });
+    }
+
+    function updateDashboardStats(data) {
+         const active = data.filter(i => i.status === "Active").length;
+         const claimed = data.filter(i => i.status === "Claimed").length;
+         const completed = data.filter(i => i.status === "Completed").length;
+         const mealsCount = data.filter(i => i.status === "Completed")
+                                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
+
+         const stats = document.querySelectorAll('#stats-restaurant .stat-number');
+         if(stats.length >= 4) {
+             stats[0].innerText = active;
+             stats[1].innerText = claimed;
+             stats[2].innerText = completed;
+             stats[3].innerText = mealsCount;
+         }
+    }
+    
+    function updateNgoStats(data) {
+        // Scheduled: Currently Active Claims
+        const scheduled = data.filter(i => i.status === "Claimed").length;
+        // Total Claimed: All items ever claimed (Claimed + Completed)
+        const total = data.length; 
+        // Meals Distributed: Completed items
+        const distributed = data.filter(i => i.status === "Completed")
+                                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
+        // Partner Restaurants: Unique restaurant names
+        const partners = new Set(data.map(i => i.restaurantName)).size;
+
+        const stats = document.querySelectorAll('#stats-ngo .stat-number');
+        if(stats.length >= 4) {
+            stats[0].innerText = scheduled;
+            stats[1].innerText = total;
+            stats[2].innerText = distributed;
+            stats[3].innerText = partners;
+        }
+    }
+
+    // =========================================
+    // === 9. GLOBAL UTILITIES ===
+    // =========================================
+    window.deletePost = async function(docId) {
+        if (confirm("Delete this listing permanently?")) {
+            await deleteDoc(doc(db, "listings", docId));
+        }
+    }
+
+    window.logout = function() {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+
+    window.showView = function(viewId) {
+        document.querySelectorAll('.view-home, #view-dashboard, #view-browse, #view-how').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        
+        const targetView = document.getElementById('view-' + viewId);
+        if (targetView) {
+            targetView.classList.remove('hidden');
+            const navItem = document.getElementById('nav-' + viewId);
+            if(navItem) navItem.classList.add('active');
+        }
+    }
+    
+    // =========================================
+    // === 10. ROLE-BASED UI INITIALIZATION ===
+    // =========================================
+    
+    // Set initial view and HOW IT WORKS section based on Role
+    if (userRole === 'NGO') {
+         // UI for NGO
+         document.getElementById("nav-browse").classList.remove('hidden');
+         document.getElementById("dashboard-restaurant-content").classList.add("hidden");
+         document.getElementById("dashboard-ngo-content").classList.remove("hidden");
+         
+         // Fix How It Works for NGO: Hide toggle, show only NGO steps
+         document.getElementById("hiw-toggle-container").classList.add("hidden");
+         document.getElementById("hiw-flow-restaurant").classList.add("hidden");
+         document.getElementById("hiw-flow-ngo").classList.remove("hidden");
+         
+    } else {
+         // UI for Restaurant
+         document.getElementById("nav-browse").classList.add('hidden');
+         document.getElementById("dashboard-restaurant-content").classList.remove("hidden");
+         document.getElementById("dashboard-ngo-content").classList.add("hidden");
+         
+         // Fix How It Works for Restaurant: Hide toggle, show only Restaurant steps
+         document.getElementById("hiw-toggle-container").classList.add("hidden");
+         document.getElementById("hiw-flow-restaurant").classList.remove("hidden");
+         document.getElementById("hiw-flow-ngo").classList.add("hidden");
+    }
+    
+    // Toggle FAQ
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+            item.parentElement.classList.toggle('active');
+        });
+    });
+</script>
 </body>
 
 </html>
