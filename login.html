@@ -277,8 +277,8 @@
     <div class="container">
 
         <div class="back">
-            <div class="logo-top"><i class="fa-solid fa-cloud-meatball"></i> SharePlate</div>
-            <div class="logo-bottom"><i class="fa-solid fa-cloud-meatball"></i> SharePlate</div>
+            <div class="logo-top"><i class="fa-solid fa-leaf"></i> SharePlate</div>
+            <div class="logo-bottom"><i class="fa-solid fa-leaf"></i> SharePlate</div>
         </div>
 
         <div class="minifront" id="mini">
@@ -317,10 +317,10 @@
     </div>
 
     <script type="module">
-        // Import Firebase modules for App, Auth, and Firestore
+        // Import Firebase modules
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js'; // Firestore added
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -333,9 +333,10 @@
             measurementId: "G-DEL9JRXB5X"
         };
 
-        // Initialize Firebase
+        // Initialize Firebase services
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         // DOM Elements
         const panel = document.getElementById("panel");
@@ -353,7 +354,7 @@
         let isSignup = false;
         let selectedRole = "Restaurant";
 
-        // Role Selection (Original Logic - Unchanged)
+        // Role Selection
         document.querySelectorAll(".role").forEach(role => {
             role.onclick = () => {
                 document.querySelectorAll(".role").forEach(r => r.classList.remove("active"));
@@ -362,7 +363,7 @@
             };
         });
 
-        // Toggle Between Sign In and Sign Up (Original Logic - Unchanged)
+        // Toggle Between Sign In and Sign Up
         toggleBtn.onclick = () => {
             clearMessages();
 
@@ -388,7 +389,7 @@
             isSignup = !isSignup;
         };
 
-        // Main Authentication Button (Firebase Integration)
+        // Main Authentication Button
         mainBtn.onclick = async () => {
             clearMessages();
 
@@ -401,17 +402,14 @@
                 showError("Please enter your name");
                 return;
             }
-
             if (!email) {
                 showError("Please enter your email");
                 return;
             }
-
             if (!password) {
                 showError("Please enter your password");
                 return;
             }
-
             if (password.length < 6) {
                 showError("Password must be at least 6 characters");
                 return;
@@ -424,20 +422,32 @@
 
             try {
                 if (isSignup) {
-                    // Sign Up
+                    // 1. Sign Up using Firebase Auth
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
 
-                    // Update user profile with name
+                    // 2. Update user profile with name
                     await updateProfile(user, {
                         displayName: username
                     });
 
-                    // Store role in localStorage (Firebase doesn't have built-in role management)
-                    localStorage.setItem('userRole', selectedRole);
-                    localStorage.setItem("loggedIn", "true");
+                    // 3. Save user data and role securely to Firestore
+                    await setDoc(doc(db, "users", user.uid), {
+                        uid: user.uid,
+                        name: username,
+                        email: email,
+                        role: selectedRole,
+                        createdAt: new Date().toISOString(),
+                    });
 
-                    showSuccess("Account created successfully!");
+                    showSuccess("Account created successfully! Redirecting...");
+
+                    // === FIX START: Set the LocalStorage key! ===
+                    localStorage.setItem("loggedIn", "true");
+                    localStorage.setItem("loggedInUser", username);
+                    // This was missing before:
+                    localStorage.setItem("loggedInRole", selectedRole);
+                    // === FIX END ===
 
                     // Redirect after 1 second
                     setTimeout(() => {
@@ -447,9 +457,30 @@
                 } else {
                     // Sign In
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    localStorage.setItem("loggedIn", "true");
+                    const user = userCredential.user;
 
-                    showSuccess("Login successful!");
+                    // === INTELLIGENT LOGIN FIX ===
+                    // Fetch the correct role from the database instead of relying on the button
+                    let finalRole = selectedRole;
+
+                    try {
+                        const userDoc = await getDoc(doc(db, "users", user.uid));
+                        if (userDoc.exists()) {
+                            finalRole = userDoc.data().role;
+                        }
+                    } catch (e) {
+                        console.log("Could not fetch role from DB, using selected button.");
+                    }
+
+                    showSuccess("Login successful! Redirecting...");
+
+                    // === FIX START: Set the LocalStorage key! ===
+                    localStorage.setItem("loggedIn", "true");
+                    localStorage.setItem("loggedInUser", user.displayName || email);
+                    localStorage.setItem("loggedInEmail", email); // <-- NEW LINE ADDED
+                    // This was missing before:
+                    localStorage.setItem("loggedInRole", finalRole);
+                    // === FIX END ===
 
                     // Redirect after 1 second
                     setTimeout(() => {
@@ -460,7 +491,6 @@
             } catch (error) {
                 console.error("Authentication error:", error);
 
-                // Handle specific errors
                 let errorMsg = "An error occurred. Please try again.";
 
                 if (error.code === 'auth/email-already-in-use') {
@@ -482,7 +512,6 @@
                 showError(errorMsg);
 
             } finally {
-                // Re-enable button
                 mainBtn.disabled = false;
                 mainBtn.textContent = originalText;
             }
