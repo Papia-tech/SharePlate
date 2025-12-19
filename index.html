@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SharePlate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --bg: #b2e3cc;
+            --card: #0f2c2f;
+            --accent: #5fd3c0;
+            --text: #ffffff;
+            --muted: #cfd8d6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif
+        }
+
+        body {
+            background: #b2e3cc;
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* For Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #122b1f;
+            border-radius: 20px;
+            border: 2px solid #b2e3cc;
+        }
+
+        .wrapper {
+            max-width: 1400px;
+            margin: 80px auto 80px;
+            background: #122b1f;
+            border-radius: 26px;
+            padding: 22px;
+        }
+
+        /* HERO */
+        .hero {
+            background: url('ngo.jpg') center/cover no-repeat;
+            border-radius: 22px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .55))
+        }
+
+        .hero-top {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            right: 18px;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            background: #b2e3cc;
+            color: #111;
+            padding: 6px 10px 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-btn i {
+            font-size: 20px;
+            color: #122b1f;
+        }
+
+        .right-side {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-right: 10px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #b2e3cc;
+            border-radius: 18px;
+            padding: 6px 14px;
+            min-width: 220px;
+
+            border: 3px solid #122b1f;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-box i {
+            color: rgba(46, 37, 20);
+            font-size: 14px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            flex: 1;
+
+            font-size: 13px;
+            color: #122b1f;
+        }
+
+        .search-box input::placeholder {
+            color: #122b1f;
+            font-style: italic;
+        }
+
+        .search-box input:focus {
+            color: #122b1f;
+        }
+
+        .profile {
+            width: 35px;
+            height: 35px;
+            background: #122b1f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile i {
+            color: #b2e3cc;
+        }
+
+        .profile-box {
+            position: absolute;
+            top: 70px;
+            right: 30px;
+            background: #122b1f;
+            border: 3px solid #b2e3cc;
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: #b2e3cc;
+            display: none;
+            width: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .profile-box p {
+            margin: 6px 0;
+            font-size: 14px;
+        }
+
+        #logout {
+            background: #b2e3cc;
+            color: #122b1f;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 26px;
+            left: 26px;
+            z-index: 2;
+            max-width: 560px
+        }
+
+        .tag {
+            padding: 5px 15px;
+            background: rgba(131, 187, 147, 0.1);
+            border-radius: 50px;
+            width: fit-content;
+            margin-bottom: 40px;
+        }
+
+        .tag i {
+            margin-right: 5px;
+        }
+
+        .hero-content h1 {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-right: 200px;
+        }
+
+        .hero-content p {
+            font-size: 14px;
+            color: var(--muted);
+            margin: 10px 0 16px
+        }
+
+        .btn {
+            background: #b2e3cc;
+            color: #122b1f;
+            border: 0;
+            margin-top: 10px;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background: #3e2c1d;
+            border: none;
+            color: #b2e3cc;
+            border: 1px solid #3e2c1d;
+            margin-bottom: 30px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .details {
+            display: flex;
+            gap: 16px;
+            margin: 20px 0px 20px 0px;
+        }
+
+        .de {
+            background: rgba(255, 255, 255, .12);
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            text-align: center;
+            min-width: 130px;
+        }
+
+        /* MAIN GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 20px;
+            margin-top: 20px
+        }
+
+        /* LEFT */
+        .left h2 {
+            font-size: 26px;
+            margin-bottom: 8px
+        }
+
+        .left p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 18px
+        }
+
+        .chips {
+            display: grid;
+            gap: 10px
+        }
+
+        .chip {
+            background: #b2e3cc;
+            color: #122b1f;
+            padding: 10px 15px;
+            border-radius: 18px;
+            min-width: 130px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500
+        }
+
+        .chip span {
+            background: #122b1f;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center
+        }
+
+        /* RIGHT */
+        .right {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            height: auto;
+            min-height: 200px;
+            background: #b2e3cc90;
+            border-radius: 20px;
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            margin-bottom: 0px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .more {
+            background: url('food.jpg') center/cover;
+            color: #b2e3cc;
+            border-radius: 20px 20px 0px 0px;
+            padding: 6px 16px;
+            font-size: 13px;
+            display: inline-block
+        }
+
+        .contact {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 50px 0px 20px 0px;
+        }
+
+        .con {
+            background: #b2e3cc;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            font-size: 30px;
+            color: #122b1f;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .con:hover {
+            background: #76be9c;
+            transform: translateY(-2px);
+        }
+
+        /* FAQ SECTION */
+        .faq-section {
+            margin-top: 40px;
+            padding: 40px 0px;
+            background: #0f2c1f;
+            border-radius: 24px;
+        }
+
+        .faq-section h2 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .faq-sub {
+            font-size: 14px;
+            color: #cfd8d6;
+            margin-bottom: 28px;
+        }
+
+        .faq-box {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: #3f5f4f;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .faq-question i {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 22px;
+            font-size: 14px;
+            color: #dbe5e1;
+            transition: max-height 0.35s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 160px;
+            padding: 10px 22px 18px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* RESPONSIVE SECTION */
+        @media (max-width: 900px) {
+            .wrapper {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .right {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px 0px;
+            }
+
+            .card {
+                height: 600px;
+            }
+
+            .hero {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .card {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .right {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                height: 600px;
+            }
+
+            .hero-content h1 {
+                font-size: 22px;
+                margin-right: 0;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .chatbox {
+                height: 0;
+                width: 0;
+                padding: 0;
+                overflow: visible;
+                background: transparent;
+                border: none;
+            }
+
+            .chatbox button {
+                display: none;
+            }
+
+            .c {
+                position: absolute;
+                top: -40px;
+                left: -40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="hero">
+            <div class="hero-top">
+                <div class="menu-btn">SharePlate <i class="fa-solid fa-circle"></i></div>
+                <div class="right-side">
+                    <div class="nav">
+                        <div class="home">Home</div>
+                        <div class="about">About</div>
+                        <div class="faq">FAQ</div>
+                        <div class="Contact">Contact</div>
+                    </div>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Searching..." />
+                    </div>
+                    <div class="profile" id="profile"><i class="fa-solid fa-user"></i></div>
+                </div>
+                <!-- 🔒 Profile Box -->
+                <div id="profileBox" class="profile-box">
+                    <p><strong id="profileName">Name:</strong> <span id="userName"></span></p>
+                    <p><strong id="profileEmail">Email:</strong> <span id="userEmail"></span></p>
+                    <button id="logout">Logout</button>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="tag"><i class="fa-solid fa-heart"></i>Reducing food waste, one plate at a time</div>
+                <h1>"SharePlate"<br>Connecting food to need</h1>
+                <p>A real-time platform that connects surplus food from restaurants with nearby NGOs to reduce waste and
+                    fight hunger.</p>
+                <button class="btn">I'm an Resturent <i class="fa-solid fa-utensils"></i></button>
+                <button class="btn">I'm an NGO <i class="fa-solid fa-arrow-right"></i></button>
+                <div class="details">
+                    <div class="de">🍽 50K+<br>Meals</div>
+                    <div class="de">❤️ 200+<br>Restaurants</div>
+                    <div class="de">👥 50+<br>NGOs</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="left">
+                <h2>Why SharePlate?</h2>
+                <p>More than 100K people travel and experience the unexplored universe.</p>
+                <div class="chips">
+                    <div class="chip">Real-time surplus food sharing <span>↗</span></div>
+                    <div class="chip">Location-based NGO matching <span>↗</span></div>
+                    <div class="chip">Fast pickup and delivery coordination <span>↗</span></div>
+                    <div class="chip">Measurable social impact <span>↗</span></div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="card Victoria">
+                    <div class="more">Veg</div>
+                </div>
+                <div class="card Dakshineshwar">
+                    <div class="more">Non Veg</div>
+                </div>
+                <div class="card Building">
+                    <div class="more">Non Veg</div>
+                </div>
+                <div class="card Howrah">
+                    <div class="more">Veg</div>
+                </div>
+            </div>
+        </section>
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <p class="faq-sub">Everything you need to know about SharePlate</p>
+
+            <div class="faq-box">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How does SharePlate work?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Restaurants list surplus food and nearby NGOs get instant notifications for safe pickup.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is SharePlate free to use?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, SharePlate is completely free for both restaurants and NGOs.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How is food safety maintained?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Only freshly cooked surplus food is listed, with strict pickup time limits.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="contact">
+            <div class="con"><i class="fa-brands fa-github"></i></div>
+            <div class="con"><i class="fa-brands fa-telegram"></i></div>
+            <div class="con"><i class="fa-brands fa-linkedin"></i></div>
+            <div class="con"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="con"><i class="fa-solid fa-message"></i></div>
+        </section>
+
+    </div>
+    <script>
+        // === 👤 Profile Box Toggle ===
+        const profileBox = document.getElementById("profileBox");
+        const signInBtn = document.getElementById("profile"); 
+
+        signInBtn.addEventListener("click", () => {
+            const user = JSON.parse(localStorage.getItem("loggedInUser"));
+            const isLoggedIn = localStorage.getItem("loggedIn");
+
+            if (user && isLoggedIn === "true") {
+                document.getElementById("userName").textContent = user.username;
+                document.getElementById("userEmail").textContent = user.email || "No email found";
+                profileBox.style.display = profileBox.style.display === "block" ? "none" : "block";
+            } else {
+                alert("Please log in first!");
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+    <script>
+        // === ❓ FAQ Toggle ===
+        const faqQuestions = document.querySelectorAll(".faq-question");
+
+        faqQuestions.forEach(question => {
+            question.addEventListener("click", () => {
+                const faqItem = question.parentElement;
+
+                document.querySelectorAll(".faq-item").forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove("active");
+                    }
+                });
+
+                faqItem.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>
