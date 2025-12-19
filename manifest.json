@@ -1,0 +1,17 @@
+{
+    "name": "SharePlate",
+    "short_name": "SharePlate",
+    "description": "Connecting Surplus Food to Those in Need",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#122b1f",
+    "theme_color": "#2d7a4d",
+    "icons": [
+        {
+            "src": "SharePlate.png",
+            "sizes": "192x192 512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
