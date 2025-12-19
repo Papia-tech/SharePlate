@@ -461,6 +461,30 @@
             </div>
         </div>
     </div>
+
+    <div id="ratingModal" class="profile-modal-overlay hidden">
+        <div class="profile-modal">
+            <div class="modal-header">
+                <h2>Rate the Restaurant</h2>
+                <button class="modal-close-btn" onclick="closeRatingModal()">×</button>
+            </div>
+
+            <div class="modal-body" style="text-align:center">
+                <p>How was your pickup experience?</p>
+
+                <div id="starContainer" class="star-rating">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+
+                <button class="create-btn" onclick="submitRating()">Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="script.js"></script>
     <script>
         //for PWA install prompt
@@ -491,4 +515,5 @@
         });
     </script>
 </body>
+
 </html>
