@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="SharePlate">
+    <meta property="og:description" content="Connecting Surplus Food to Those in Need">
+    <meta property="og:image" content="https://papia-tech.github.io/Test/meta.jpg">
+    <meta property="og:url" content="https://papia-tech.github.io/Test/">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon.png">
     <title>SharePlate | Unified Platform</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Merriweather:wght@400;700&display=swap"
@@ -28,6 +34,27 @@
             --completed-pill: #9ca3af;
             --tag-bg: #ffffff;
         }
+        
+        /* ADD Custom Toast/Alert Style */
+        #customToast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a4d2e;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #customToast.show {
+            opacity: 1;
+        }
+
 
         /* Scrollbar */
         html {
@@ -65,7 +92,7 @@
         .hidden {
             display: none !important;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 10px auto;
@@ -91,16 +118,25 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
             font-family: 'Merriweather', serif;
             font-weight: 700;
-            font-size: 22px;
-            color: #1a4d2e;
+            font-size: 20px;
+            color: #222;
+        }
+
+        .plate{
+            display: flex;
+            align-items: center;
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--primary-green);
         }
 
         .logo i {
             color: #2d7a4d;
             font-size: 24px;
+            margin-right: 10px;
         }
 
         .nav-links {
@@ -159,7 +195,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 45px;
+            margin-top: 0px;
             padding: 60px 0;
             gap: 40px;
         }
@@ -215,6 +251,25 @@
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 30px;
+        }
+
+        .hero-content .dashboard-btn {
+            background: #1a4d2e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .hero-content .dashboard-btn:hover {
+            background: #2d7a4d;
         }
 
         .hero-section .hero-image {
@@ -390,7 +445,7 @@
         #view-how {
             margin-top: 40px;
         }
-        
+
         .listing-form {
             background: white;
             padding: 30px;
@@ -405,16 +460,16 @@
             color: #0f2c1f;
             margin-bottom: 20px;
         }
-        
+
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
-        .form-grid input, 
-        .form-grid textarea, 
-        .form-grid select { 
+        .form-grid input,
+        .form-grid textarea,
+        .form-grid select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -423,7 +478,7 @@
             outline: none;
             background: white;
         }
-        
+
         .form-group-full {
             grid-column: 1 / -1;
         }
@@ -432,11 +487,13 @@
             resize: vertical;
             min-height: 100px;
         }
-        
-        .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus {
+
+        .form-grid input:focus,
+        .form-grid textarea:focus,
+        .form-grid select:focus {
             border-color: var(--primary-green);
         }
-        
+
         .upload-wrapper {
             display: flex;
             align-items: center;
@@ -447,20 +504,20 @@
             cursor: pointer;
             transition: border-color 0.2s;
         }
-        
+
         .upload-wrapper:hover {
             border-color: var(--primary-green);
         }
-        
+
         .upload-wrapper input {
             display: none;
         }
-        
+
         .upload-wrapper i {
             font-size: 20px;
             color: #888;
         }
-        
+
         .upload-wrapper span {
             font-size: 14px;
             color: #666;
@@ -565,11 +622,11 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 20px; 
+            gap: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
             border: 1px solid #eee;
         }
-        
+
         .list-thumb {
             width: 80px;
             height: 80px;
@@ -579,7 +636,7 @@
         }
 
         .card-info {
-            flex: 1; 
+            flex: 1;
         }
 
         .card-info h3 {
@@ -590,7 +647,7 @@
             gap: 12px;
             margin-bottom: 8px;
         }
-        
+
         .restaurant-label {
             font-size: 12px;
             color: #2d7a4d;
@@ -621,7 +678,7 @@
             background: var(--completed-pill);
             color: #fff;
         }
-        
+
         .status-tag {
             background: #e6f2ed;
             color: #2d7a4d;
@@ -638,7 +695,7 @@
             color: #666;
             font-size: 13px;
         }
-        
+
         /* Specific adjustments for NGO cards with more details */
         .ngo-card-details {
             display: grid;
@@ -649,15 +706,18 @@
             margin-top: 5px;
         }
 
-        .card-meta span, .ngo-detail-item {
+        .card-meta span,
+        .ngo-detail-item {
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .card-meta i, .ngo-detail-item i {
+        .card-meta i,
+        .ngo-detail-item i {
             color: #888;
-            width: 16px; /* Align icons */
+            width: 16px;
+            /* Align icons */
             text-align: center;
         }
 
@@ -681,7 +741,7 @@
             border: 1px solid #1a4d2e;
             color: #1a4d2e;
         }
-        
+
         .btn-edit:hover {
             background: #f0f7f4;
         }
@@ -691,12 +751,19 @@
             color: white;
         }
         
+        /* === NEW DISABLED BUTTON STYLE === */
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none; /* Prevents click events */
+        }
+
         /* Pick Up Button Style */
         .btn-complete {
-             background: #10b981;
-             color: white;
+            background: #10b981;
+            color: white;
         }
-        
+
         .btn-complete:hover {
             background: #0d9668;
         }
@@ -1023,6 +1090,23 @@
             margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* NEW: Map icon style */
+        .restaurant-map-icon {
+            font-size: 14px;
+            color: #2d7a4d;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+
+        .restaurant-map-icon:hover {
+            color: #1e5c38;
         }
 
         .dish-title {
@@ -1059,17 +1143,17 @@
         }
 
         .meta-item i {
-            color: #888;
+            color: #1e5c38;
         }
 
         .meta-item.time {
-            color: #d9534f;
+            color: #555;
             font-weight: 500;
         }
 
         .btn-claim {
             width: 100%;
-            background: #2d7a4d;
+            background: #1a4d2e;
             color: white;
             border: none;
             padding: 12px;
@@ -1081,8 +1165,309 @@
         }
 
         .btn-claim:hover {
-            background: #1e5c38;
+            background: #2d7a4d;
         }
+
+        /* NEW PROFILE BUTTON */
+        .profile-btn {
+            background: var(--light-green-bg);
+            color: var(--primary-green);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* NEW PROFILE MODAL STYLES */
+        .profile-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .profile-modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Animation on show */
+        .profile-modal-overlay:not(.hidden) .profile-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 22px;
+            color: var(--text-dark);
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        /* Profile Avatar Changes */
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            color: white;
+            font-size: 30px;
+            line-height: 80px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Important for image */
+            position: relative;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* New photo upload styling for the modal */
+        .profile-photo-controls {
+            margin-bottom: 25px;
+        }
+        
+        .profile-photo-controls label {
+            background: var(--light-green-bg);
+            color: var(--primary-green);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .profile-photo-controls label:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        #profile-photo-upload {
+            display: none;
+        }
+
+
+        .profile-info p {
+            font-size: 15px;
+            margin-bottom: 8px;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .profile-info strong {
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        /* --- NEW MODAL STYLES FOR LISTING FORM --- */
+        .listing-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            overflow-y: auto;
+            /* Allow scrolling for small screens */
+            padding: 20px 0;
+        }
+
+        .listing-modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            /* Wider for the form */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .listing-modal-overlay:not(.hidden) .listing-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .listing-modal .modal-header h2 {
+            font-size: 24px;
+        }
+
+        .listing-modal .listing-form {
+            /* Remove fixed styles from the original form, but keep content styles */
+            padding: 0;
+            margin-bottom: 0;
+            box-shadow: none;
+        }
+        
+        /* === Phone Input Styling === */
+        .phone-input-group {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .phone-input-group select {
+            flex: 0 0 35%; /* Adjust width for country code */
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .phone-input-group input {
+            flex: 1;
+            width: auto; /* Override 100% width from general input style */
+        }
+        
+        /* Map specific styles */
+        .map-wrapper {
+            grid-column: 1 / -1;
+            padding: 10px 0;
+        }
+        .map-container {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* New Address input layout for location button */
+        .address-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .address-input-container input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .location-btn {
+            padding: 10px;
+            background: var(--light-green-bg);
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .location-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* === NEW ADD LISTING CARD === */
+        .add-listing-card {
+            background: var(--light-green-bg);
+            border: 2px dashed var(--dashed-border);
+            border-radius: 20px;
+            padding: 50px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-listing-card .upload {
+            font-size: 40px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .add-listing-card:hover {
+            background: #d4e8e1;
+            border-color: var(--primary-green);
+        }
+
+        .add-listing-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .add-listing-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
 
         /* Mobile Responsive */
         @media (max-width: 900px) {
@@ -1120,9 +1505,13 @@
             .logo {
                 font-size: 18px;
             }
-            
+
             .form-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .phone-input-group select {
+                flex: 0 0 40%;
             }
         }
     </style>
@@ -1132,7 +1521,7 @@
 
     <header class="header">
         <div class="logo">
-            <i class="fa-solid fa-leaf"></i> SharePlate
+            <i class="fa-solid fa-leaf"></i> Share<div class="plate">Plate</div>
         </div>
 
         <nav class="nav-links">
@@ -1143,6 +1532,9 @@
         </nav>
 
         <div class="header-actions">
+            <button class="profile-btn" onclick="toggleProfileModal(event)">
+                <i class="fa-solid fa-user-circle"></i>
+            </button>
             <a onclick="logout()" class="btn-signin">Sign Out</a>
         </div>
     </header>
@@ -1157,6 +1549,8 @@
                     <p class="hero-sub">A real-time platform that connects restaurants with surplus food to nearby NGOs
                         to
                         reduce waste and fight hunger effectively.</p>
+                    <button class="dashboard-btn" onclick="showView('dashboard')">Go to Dashboard <i
+                            class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 <div class="hero-image"></div>
             </div>
@@ -1231,11 +1625,11 @@
             </div>
 
             <div class="footer">
-                <p>&copy; 2025 SharePlate. All rights reserved.</p>
+                <p>© 2025 SharePlate. All rights reserved.</p>
                 <div class="social-links">
-                    <i class="fa-brands fa-github"></i>
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <i class="fa-brands fa-square-facebook"></i>
                     <i class="fa-brands fa-linkedin"></i>
-                    <i class="fa-brands fa-twitter"></i>
                 </div>
             </div>
         </div>
@@ -1272,40 +1666,14 @@
                     </div>
                 </div>
 
-                <div class="listing-form">
-                    <h2>Create Food Listing</h2>
-                    <div class="form-grid">
-                        <input type="text" id="restaurant-name" placeholder="Restaurant Name">
-                        <input type="text" id="restaurant-phone" placeholder="Phone Number">
-                        
-                        <input type="text" id="dish-name" placeholder="Food Name (e.g., Lunch Buffet)">
-                        <input type="number" id="portions-available" placeholder="Portions Available">
-                        
-                        <select id="food-type">
-                            <option value="Vegetarian">Vegetarian</option>
-                            <option value="Non-Veg">Non-Veg</option>
-                            <option value="Vegan">Vegan</option>
-                        </select>
-                        
-                        <input type="text" id="pickup-hours" placeholder="Pickup Hours (e.g., 2:00 PM - 4:00 PM)">
-                        
-                        <label class="upload-wrapper" for="food-image-upload">
-                            <i class="fa-solid fa-camera"></i>
-                            <span id="file-name-display">Upload Food Image (Optional)</span>
-                            <input type="file" id="food-image-upload" accept="image/*" onchange="updateFileName(this)">
-                        </label>
-                        
-                        <input type="text" id="restaurant-address" placeholder="Restaurant Address" class="form-group-full">
-                        <textarea id="food-description" placeholder="Food Description" class="form-group-full"></textarea>
-                    </div>
-                    <button class="create-btn" style="margin-top: 20px;" onclick="addPost()">
-                        <i class="fa-solid fa-plus"></i> Post New Listing
-                    </button>
-                    <button class="action-btn btn-cancel hidden" id="cancel-edit-btn" style="margin-top: 20px; margin-left:10px;" onclick="cancelEdit()">
-                        Cancel Edit
+                <div class="add-listing-card" onclick="toggleCreateModal(true)">
+                    <i class="fa-solid fa-arrow-up-from-bracket upload"></i>
+                    <h3>Add New Food Listing</h3>
+                    <p>Have surplus food? List it now and connect with NGOs in your area.</p>
+                    <button class="create-btn">
+                        <i class="fa-solid fa-plus"></i> Create Listing
                     </button>
                 </div>
-
                 <h2 class="section-title">My Active Listings</h2>
                 <div id="listingContainer">
                     <p>No listings yet. Use the form above to create one!</p>
@@ -1335,7 +1703,7 @@
                         <div class="stat-label">Partner Restaurants</div>
                     </div>
                 </div>
-                
+
                 <h2 class="section-title">My Claims</h2>
                 <div id="claimsContainer">
                     <p>You have no active claims. Browse available food to claim items!</p>
@@ -1374,7 +1742,7 @@
                 <h1>Making Food Sharing Simple</h1>
                 <p>Whether you have food to give or mouths to feed, SharePlate connects you in three simple steps.</p>
             </div>
-            
+
             <div class="role-toggle-container" id="hiw-toggle-container">
                 <div class="toggle-bg">
                     <button id="hiw-btn-rest" class="hiw-toggle-btn active" onclick="setHiwRole('restaurant')">For
@@ -1456,338 +1824,773 @@
         </div>
 
     </div>
-
-<script type="module">
-    // 1. IMPORT FIREBASE FUNCTIONS
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, updateDoc, onSnapshot, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    // 2. YOUR CONFIGURATION
-    const firebaseConfig = {
-        apiKey: "AIzaSyCaC0u5W3JG1Wmo0FAMmHTOYVrR0KUf8Mw",
-        authDomain: "shareplate-free.firebaseapp.com",
-        projectId: "shareplate-free",
-        messagingSenderId: "407885827230",
-        appId: "1:407885827230:web:a9996e34dde6de896cff8f",
-        measurementId: "G-QSDJ5NGNTZ"
-    };
-
-    // 3. INITIALIZE APP & DATABASE
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const listingsRef = collection(db, "listings");
-
-    // CHECK LOGIN STATUS
-    const isLoggedIn = localStorage.getItem("loggedIn");
-    const currentUser = localStorage.getItem("loggedInUser"); // Used to filter "My Listings"
-    const userRole = localStorage.getItem("loggedInRole");
-
-    // Edit State Variables
-    let isEditing = false;
-    let editDocId = null;
-    let cachedMyData = []; // Store data locally to find it for editing
-    let cachedBrowseData = []; // Store active listings for filtering
-
-    // Filter State
-    let currentFilterType = "All";
-
-    if (!isLoggedIn) {
-        window.location.href = "login.html";
-    }
-
-    // =========================================
-    // === 4. HELPER: CONVERT IMAGE TO STRING ===
-    // =========================================
-    const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
+    <div id="profileModal" class="profile-modal-overlay hidden">
+        <div class="profile-modal">
+            <div class="modal-header">
+                <h2>Your Profile</h2>
+                <button class="modal-close-btn" onclick="toggleProfileModal(event)">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-avatar" id="profileAvatar">
+                    <i class="fa-solid fa-leaf"></i>
+                    <img id="profileImage" src="" class="hidden" alt="Profile Photo">
+                </div>
+                
+                <div class="profile-photo-controls">
+                    <label for="profile-photo-upload">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Change Photo
+                    </label>
+                    <input type="file" id="profile-photo-upload" accept="image/*" onchange="handleProfilePhotoUpload(this)">
+                </div>
+                <div class="profile-info">
+                    <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+                    <p><strong>Role:</strong> <span id="profileRole">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    // =========================================
-    // === UI HELPER: SHOW FILENAME ON SELECT ===
-    // =========================================
-    window.updateFileName = function(input) {
-        const display = document.getElementById("file-name-display");
-        if (input.files && input.files.length > 0) {
-            display.textContent = input.files[0].name; // Show the filename
-            display.style.color = "#2d7a4d"; // Turn text green
-            display.style.fontWeight = "600";
-        } else {
+    <div id="browseMapModal" class="profile-modal-overlay hidden">
+        <div class="profile-modal">
+            <div class="modal-header">
+                <h2 id="browseMapTitle">Restaurant Location</h2>
+                <button class="modal-close-btn" onclick="toggleBrowseMapModal(false)">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="map-container" style="height: 250px; margin-bottom: 15px; border: none;">
+                     <iframe id="browse-restaurant-map" src="https://maps.google.com/maps?q=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <p style="text-align: left; padding: 0 10px; font-size: 14px;">
+                    <strong>Address:</strong> <span id="browseMapAddress">Loading...</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="listingModal" class="listing-modal-overlay hidden">
+        <div class="listing-modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Create Food Listing</h2>
+                <button class="modal-close-btn" onclick="toggleCreateModal(false)">×</button>
+            </div>
+            <div class="listing-form">
+                <div class="form-grid">
+                    <input type="text" id="restaurant-name" placeholder="Restaurant Name">
+                    
+                    <div class="phone-input-group">
+                        <select id="country-code-select">
+                            <option value="+91" selected>+91 (India)</option>
+                            <option value="+1">+1 (USA)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+61">+61 (AUS)</option>
+                            <option value="+49">+49 (GER)</option>
+                        </select>
+                        <input type="text" id="restaurant-phone" placeholder="Phone Number (10 digits)">
+                    </div>
+                    <input type="text" id="dish-name" placeholder="Food Name (e.g., Lunch Buffet)">
+                    <input type="number" id="portions-available" placeholder="Portions Available">
+
+                    <select id="food-type">
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Non-Veg">Non-Veg</option>
+                        <option value="Vegan">Vegan</option>
+                    </select>
+
+                    <label class="upload-wrapper" for="food-image-upload">
+                        <i class="fa-solid fa-camera"></i>
+                        <span id="file-name-display">Upload Food Image (Optional)</span>
+                        <input type="file" id="food-image-upload" accept="image/*" onchange="updateFileName(this)">
+                    </label>
+
+                    <div class="map-wrapper form-group-full">
+                        <div class="map-container">
+                            <iframe id="restaurant-map" src="https://maps.google.com/maps?q=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="address-input-container">
+                            <input type="text" id="restaurant-address" placeholder="Restaurant Address">
+                            <button type="button" class="location-btn" onclick="getCurrentLocation()" title="Use Current Location">
+                                <i class="fa-solid fa-location-crosshairs"></i>
+                            </button>
+                        </div>
+                        <small id="location-status" style="grid-column: 1 / -1; color: var(--text-muted); margin-top: 5px;">Enter address or use location button.</small>
+                    </div>
+                    
+                    <textarea id="food-description" placeholder="Food Description" class="form-group-full"></textarea>
+                </div>
+                <button class="create-btn" style="margin-top: 20px;" onclick="addPost()" id="modal-submit-btn">
+                    <i class="fa-solid fa-plus"></i> Post New Listing
+                </button>
+                <button class="action-btn btn-cancel hidden" id="cancel-edit-btn"
+                    style="margin-top: 20px; margin-left:10px;" onclick="cancelEdit()">
+                    Cancel Edit
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="customToast" class="hidden"></div>
+
+    <div id="customConfirmModal" class="profile-modal-overlay hidden">
+        <div class="profile-modal" style="max-width: 350px;">
+            <div class="modal-body" style="padding: 20px;">
+                <p id="confirmMessage" style="font-size: 16px; margin-bottom: 25px; font-weight: 500;">Are you sure?</p>
+                <div style="display: flex; justify-content: space-around; gap: 10px;">
+                    <button class="action-btn btn-edit" id="confirmCancel" style="flex: 1;">Cancel</button>
+                    <button class="action-btn btn-cancel" id="confirmOK" style="flex: 1;">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // 1. IMPORT FIREBASE FUNCTIONS
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, updateDoc, onSnapshot, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 2. YOUR CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyCaC0u5W3JG1Wmo0FAMmHTOYVrR0KUf8Mw",
+            authDomain: "shareplate-free.firebaseapp.com",
+            projectId: "shareplate-free",
+            messagingSenderId: "407885827230",
+            appId: "1:407885827230:web:a9996e34dde6de896cff8f",
+            measurementId: "G-QSDJ5NGNTZ"
+        };
+
+        // 3. INITIALIZE APP & DATABASE
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const listingsRef = collection(db, "listings");
+
+        // CHECK LOGIN STATUS
+        const isLoggedIn = localStorage.getItem("loggedIn");
+        const currentUser = localStorage.getItem("loggedInUser"); // Used to filter "My Listings"
+        const userRole = localStorage.getItem("loggedInRole");
+
+        // Edit State Variables
+        let isEditing = false;
+        let editDocId = null;
+        let cachedMyData = []; // Store data locally for Dashboard (Restaurant listings OR NGO claims)
+        let cachedBrowseData = []; // Store active listings for filtering
+
+        // Filter State
+        let currentFilterType = "All";
+
+        if (!isLoggedIn) {
+            window.location.href = "login.html";
+        }
+
+        // =========================================
+        // === 4. HELPER: CONVERT IMAGE TO STRING ===
+        // =========================================
+        const convertBase64 = (file) => {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+
+                fileReader.onload = () => {
+                    resolve(fileReader.result);
+                };
+
+                fileReader.onerror = (error) => {
+                    reject(error);
+                };
+            });
+        };
+        
+        // =========================================
+        // === NEW: CUSTOM ALERT/CONFIRM HANDLERS ===
+        // =========================================
+        window.showCustomAlert = function (message) {
+            const toast = document.getElementById('customToast');
+            if (!toast) return;
+
+            toast.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                // Hide after transition
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 500);
+            }, 3000); // Display for 3 seconds
+        }
+        
+        let confirmResolver = null;
+
+        window.showCustomConfirm = function (message) {
+            const modal = document.getElementById('customConfirmModal');
+            const msgElement = document.getElementById('confirmMessage');
+
+            msgElement.textContent = message;
+            modal.classList.remove('hidden');
+
+            return new Promise((resolve) => {
+                confirmResolver = resolve;
+            });
+        }
+        
+        // Event listeners for the custom modal buttons (outside of showCustomConfirm)
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('customConfirmModal');
+            const okBtn = document.getElementById('confirmOK');
+            const cancelBtn = document.getElementById('confirmCancel');
+
+            if (okBtn) {
+                okBtn.onclick = () => {
+                    modal.classList.add('hidden');
+                    if (confirmResolver) {
+                        confirmResolver(true);
+                        confirmResolver = null;
+                    }
+                };
+            }
+            if (cancelBtn) {
+                cancelBtn.onclick = () => {
+                    modal.classList.add('hidden');
+                    if (confirmResolver) {
+                        confirmResolver(false);
+                        confirmResolver = null;
+                    }
+                };
+            }
+        });
+
+        // =========================================
+        // === UI HELPER: SHOW FILENAME ON SELECT ===
+        // =========================================
+        window.updateFileName = function (input) {
+            const display = document.getElementById("file-name-display");
+            if (input.files && input.files.length > 0) {
+                // do not use second brackets in print.
+                display.textContent = input.files[0].name; 
+                display.style.color = "#2d7a4d"; // Turn text green
+                display.style.fontWeight = "600";
+            } else {
+                // do not use second brackets in print.
+                display.textContent = "Upload Food Image (Optional)";
+                display.style.color = "#666";
+            }
+        }
+        
+        // =========================================
+        // === NEW: MAP/LOCATION UTILITY FUNCTION ===
+        // =========================================
+        // Modified to accept optional mapIframeId
+        window.updateMap = function (address, mapIframeId = 'restaurant-map') {
+            const mapIframe = document.getElementById(mapIframeId);
+            if (mapIframe) {
+                // Encode the address for the Google Maps query URL
+                const encodedAddress = encodeURIComponent(address);
+                // Use a generic Google Maps embed URL as a placeholder for dynamic address lookup
+                // do not use second brackets in print.
+                mapIframe.src = `https://maps.google.com/maps?q=$?q=$${encodedAddress}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+            }
+        }
+        
+        // MODIFIED: getCurrentLocation to perform reverse geocoding via Nominatim
+        window.getCurrentLocation = function() {
+            const addressInput = document.getElementById('restaurant-address');
+            const statusMessage = document.getElementById('location-status');
+            
+            if (navigator.geolocation) {
+                // do not use second brackets in print.
+                statusMessage.textContent = "Getting location...";
+                
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        
+                        // Use a public reverse geocoding service (Nominatim/OpenStreetMap)
+                        // do not use second brackets in print.
+                        const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
+                        
+                        try {
+                            const response = await fetch(nominatimUrl);
+                            const data = await response.json();
+                            
+                            // do not use second brackets in print.
+                            let areaName = "Address not found";
+                            
+                            if (data.address) {
+                                // Prioritize known area fields for a cleaner "area wise" output
+                                const address = data.address;
+                                areaName = [
+                                    address.road,
+                                    address.suburb || address.neighbourhood,
+                                    address.village || address.town || address.city,
+                                    address.state,
+                                    address.postcode
+                                ].filter(Boolean).join(', ');
+                                
+                                // Fallback to display name if the constructed address is too specific or missing key components
+                                if (areaName.length < 15 || areaName.includes('undefined')) {
+                                     areaName = data.display_name;
+                                }
+                            }
+                            
+                            addressInput.value = areaName;
+                            updateMap(areaName); 
+                            // do not use second brackets in print.
+                            statusMessage.textContent = `Location set to area: ${areaName.substring(0, 50)}...`;
+
+                        } catch (e) {
+                            console.error("Reverse Geocoding Error:", e);
+                            // do not use second brackets in print.
+                            const simulatedAddress = `Approximate location: Lat ${lat.toFixed(4)}, Lng ${lng.toFixed(4)}`;
+                            addressInput.value = simulatedAddress;
+                            updateMap(simulatedAddress); 
+                            // do not use second brackets in print.
+                            statusMessage.textContent = "Could not get full address from service. Showing coordinates.";
+                        }
+                    },
+                    (error) => {
+                        // do not use second brackets in print.
+                        let msg = "Geolocation failed: ";
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                // do not use second brackets in print.
+                                msg += "User denied the request for Geolocation. Please allow location access.";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                // do not use second brackets in print.
+                                msg += "Location information is unavailable.";
+                                break;
+                            case error.TIMEOUT:
+                                // do not use second brackets in print.
+                                msg += "The request to get user location timed out.";
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                // do not use second brackets in print.
+                                msg += "An unknown error occurred.";
+                                break;
+                        }
+                        // do not use second brackets in print.
+                        statusMessage.textContent = msg;
+                    },
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                );
+            } else {
+                // do not use second brackets in print.
+                statusMessage.textContent = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+        // =========================================
+        // === 5. ADD / UPDATE LISTING FUNCTION (MODIFIED) ===
+        // =========================================
+        window.addPost = async function () {
+            const title = document.getElementById("dish-name").value;
+            const qty = document.getElementById("portions-available").value;
+            const restName = document.getElementById("restaurant-name").value;
+            
+            // NEW: Get Country Code and Phone Number
+            const countryCode = document.getElementById("country-code-select").value;
+            const phoneNumber = document.getElementById("restaurant-phone").value.trim();
+            const fullPhoneNumber = countryCode + " " + phoneNumber;
+
+            const restAddr = document.getElementById("restaurant-address").value;
+            // REMOVED: const pickupHours = document.getElementById("pickup-hours").value;
+            const desc = document.getElementById("food-description").value;
+            const type = document.getElementById("food-type").value; // Get the selected type
+            const fileInput = document.getElementById("food-image-upload");
+
+            // Basic Validation
+            if (!title || !qty || !restName) {
+                // do not use second brackets in print.
+                showCustomAlert("Please fill in the required fields (Name, Quantity, Restaurant Name).");
+                return;
+            }
+            
+            // NEW: Phone Number Validation
+            const phoneDigits = phoneNumber.replace(/\D/g, ''); // Remove all non-digits
+            if (phoneDigits.length !== 10) {
+                 // do not use second brackets in print.
+                showCustomAlert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+
+            const createBtn = document.getElementById("modal-submit-btn"); // Changed selector to target the modal button
+            // do not use second brackets in print.
+            const originalBtnText = isEditing ? "Update Listing" : "Post New Listing";
+            // do not use second brackets in print.
+            createBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            createBtn.disabled = true;
+
+            try {
+                let imageString = "";
+
+                // CONVERT IMAGE TO STRING
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    if (file.size > 800 * 1024) {
+                        // do not use second brackets in print.
+                        showCustomAlert("Image is too large! Max 800KB.");
+                        // do not use second brackets in print.
+                        createBtn.innerHTML = originalBtnText;
+                        createBtn.disabled = false;
+                        return;
+                    }
+                    imageString = await convertBase64(file);
+                }
+                
+                // NEW: Get Current Time and Date
+                const now = new Date();
+                const uploadTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                const uploadDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+
+                const dataPayload = {
+                    title: title,
+                    quantity: qty,
+                    // MODIFIED: Use the current upload time as the pickupTime
+                    pickupTime: uploadTime, 
+                    // NEW: Store the date separately for display/sorting
+                    uploadDate: uploadDate,
+                    dateTime: new Date().toISOString().split('T')[0],
+                    status: "Active",
+                    tags: [type], // Use the selected type
+                    restaurantName: restName,
+                    restaurantPhone: fullPhoneNumber, // Save combined phone number
+                    restaurantAddress: restAddr,
+                    description: desc,
+                    createdBy: currentUser,
+                    createdAt: Date.now()
+                };
+
+                // Only update image if a new one was uploaded
+                if (imageString) {
+                    dataPayload.imageUrl = imageString;
+                }
+
+                if (isEditing && editDocId) {
+                    // UPDATE EXISTING DOC
+                    const docRef = doc(db, "listings", editDocId);
+                    await updateDoc(docRef, dataPayload);
+                    // do not use second brackets in print.
+                    showCustomAlert("Listing updated successfully!");
+                    cancelEdit(); // Reset form and close modal
+                } else {
+                    // CREATE NEW DOC
+                    if (!imageString) dataPayload.imageUrl = ""; // Ensure field exists
+                    await addDoc(listingsRef, dataPayload);
+                    // do not use second brackets in print.
+                    showCustomAlert("Listing posted successfully!");
+                    clearForm();
+                    toggleCreateModal(false); // Close modal on success
+                }
+
+            } catch (e) {
+                console.error("Error adding/updating document: ", e);
+                 // do not use second brackets in print.
+                showCustomAlert("Error: Listing failed.");
+            } finally {
+                 // do not use second brackets in print.
+                createBtn.innerHTML = isEditing ? '<i class="fa-solid fa-pen"></i> Update Listing' : '<i class="fa-solid fa-plus"></i> Post New Listing';
+                createBtn.disabled = false;
+            }
+        }
+
+        // Helper to clear form (MODIFIED)
+        function clearForm() {
+            document.getElementById("dish-name").value = '';
+            document.getElementById("portions-available").value = '';
+            document.getElementById("restaurant-name").value = '';
+            
+            // MODIFIED: Reset phone fields
+            document.getElementById("country-code-select").value = '+91';
+            document.getElementById("restaurant-phone").value = '';
+            
+            document.getElementById("restaurant-address").value = '';
+            document.getElementById("food-description").value = '';
+            // REMOVED: document.getElementById("pickup-hours").value = '';
+            document.getElementById("food-image-upload").value = '';
+            
+            // Reset map and status
+            updateMap('1600 Amphitheatre Parkway, Mountain View, CA');
+            // do not use second brackets in print.
+            document.getElementById('location-status').textContent = "Enter address or use location button.";
+
+
+            const display = document.getElementById("file-name-display");
+            // do not use second brackets in print.
             display.textContent = "Upload Food Image (Optional)";
             display.style.color = "#666";
         }
-    }
 
-    // =========================================
-    // === 5. ADD / UPDATE LISTING FUNCTION ===
-    // =========================================
-    window.addPost = async function() {
-        const title = document.getElementById("dish-name").value;
-        const qty = document.getElementById("portions-available").value;
-        const restName = document.getElementById("restaurant-name").value;
-        const restPhone = document.getElementById("restaurant-phone").value; // Added phone capture
-        const restAddr = document.getElementById("restaurant-address").value;
-        const pickupHours = document.getElementById("pickup-hours").value;
-        const desc = document.getElementById("food-description").value;
-        const type = document.getElementById("food-type").value; // Get the selected type
-        const fileInput = document.getElementById("food-image-upload");
+        // =========================================
+        // === EDITING FUNCTIONS (MODIFIED) ===
+        // =========================================
+        window.editPost = function (id) {
+            // Find in cachedMyData (used for Restaurant listings)
+            const item = cachedMyData.find(i => i.id === id);
+            if (!item) return;
 
-        // Basic Validation
-        if (!title || !qty || !restName) {
-            alert("Please fill in the required fields (Name, Quantity, Restaurant Name).");
-            return;
-        }
-
-        const createBtn = document.querySelector('#dashboard-restaurant-content .create-btn');
-        const originalBtnText = isEditing ? "Update Listing" : "Post New Listing";
-        createBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
-        createBtn.disabled = true;
-
-        try {
-            let imageString = ""; 
-
-            // CONVERT IMAGE TO STRING
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                if (file.size > 800 * 1024) { 
-                    alert("Image is too large! Please use images under 800KB.");
-                    createBtn.innerHTML = originalBtnText;
-                    createBtn.disabled = false;
-                    return;
-                }
-                imageString = await convertBase64(file);
-            }
-
-            const dataPayload = {
-                title: title,
-                quantity: qty,
-                pickupTime: pickupHours || "2 hours",
-                dateTime: new Date().toISOString().split('T')[0],
-                status: "Active",
-                tags: [type], // Use the selected type
-                restaurantName: restName,
-                restaurantPhone: restPhone, // Save phone number
-                restaurantAddress: restAddr,
-                description: desc,
-                createdBy: currentUser,
-                createdAt: Date.now()
-            };
+            // Populate fields
+            document.getElementById("restaurant-name").value = item.restaurantName;
             
-            // Only update image if a new one was uploaded
-            if(imageString) {
-                dataPayload.imageUrl = imageString;
-            }
+            // MODIFIED: Split the saved phone number back into code and number
+            const fullPhone = item.restaurantPhone || '+91 '; // Default if missing
+            const parts = fullPhone.split(' ');
+            const code = parts[0];
+            const number = parts.slice(1).join(' '); // Rejoin remaining parts for the number
 
-            if (isEditing && editDocId) {
-                // UPDATE EXISTING DOC
-                const docRef = doc(db, "listings", editDocId);
-                await updateDoc(docRef, dataPayload);
-                alert("Listing updated successfully!");
-                cancelEdit(); // Reset form
+            // Ensure we set a valid code, otherwise use default
+            const codeSelect = document.getElementById("country-code-select");
+            if ([...codeSelect.options].map(o => o.value).includes(code)) {
+                codeSelect.value = code;
             } else {
-                // CREATE NEW DOC
-                if(!imageString) dataPayload.imageUrl = ""; // Ensure field exists
-                await addDoc(listingsRef, dataPayload);
-                alert("Listing posted successfully!");
-                clearForm();
+                 codeSelect.value = '+91'; // Default to India if code is unrecognized
             }
+            document.getElementById("restaurant-phone").value = number.trim();
 
-        } catch (e) {
-            console.error("Error adding/updating document: ", e);
-            alert("Error: " + e.message);
-        } finally {
-            if(!isEditing) createBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Post New Listing';
-            createBtn.disabled = false;
-        }
-    }
-    
-    // Helper to clear form
-    function clearForm() {
-        document.getElementById("dish-name").value = '';
-        document.getElementById("portions-available").value = '';
-        document.getElementById("restaurant-name").value = '';
-        document.getElementById("restaurant-phone").value = '';
-        document.getElementById("restaurant-address").value = '';
-        document.getElementById("food-description").value = '';
-        document.getElementById("pickup-hours").value = '';
-        document.getElementById("food-image-upload").value = ''; 
-        
-        const display = document.getElementById("file-name-display");
-        display.textContent = "Upload Food Image (Optional)";
-        display.style.color = "#666";
-    }
 
-    // =========================================
-    // === EDITING FUNCTIONS ===
-    // =========================================
-    window.editPost = function(id) {
-        const item = cachedMyData.find(i => i.id === id);
-        if(!item) return;
+            document.getElementById("dish-name").value = item.title;
+            document.getElementById("portions-available").value = item.quantity;
+            document.getElementById("food-type").value = item.tags ? item.tags[0] : 'Vegetarian';
+            // REMOVED: document.getElementById("pickup-hours").value = item.pickupTime;
+            const address = item.restaurantAddress;
+            document.getElementById("restaurant-address").value = address;
+            document.getElementById("food-description").value = item.description || '';
 
-        // Populate fields
-        document.getElementById("restaurant-name").value = item.restaurantName;
-        document.getElementById("restaurant-phone").value = item.restaurantPhone || '';
-        document.getElementById("dish-name").value = item.title;
-        document.getElementById("portions-available").value = item.quantity;
-        document.getElementById("food-type").value = item.tags ? item.tags[0] : 'Vegetarian';
-        document.getElementById("pickup-hours").value = item.pickupTime;
-        document.getElementById("restaurant-address").value = item.restaurantAddress;
-        document.getElementById("food-description").value = item.description || '';
-
-        // Set Edit Mode
-        isEditing = true;
-        editDocId = id;
-        
-        // Update Buttons
-        const createBtn = document.querySelector('.create-btn');
-        createBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Listing';
-        document.getElementById('cancel-edit-btn').classList.remove('hidden');
-        
-        // Scroll to form
-        document.querySelector('.listing-form').scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    window.cancelEdit = function() {
-        isEditing = false;
-        editDocId = null;
-        clearForm();
-        
-        const createBtn = document.querySelector('.create-btn');
-        createBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Post New Listing';
-        document.getElementById('cancel-edit-btn').classList.add('hidden');
-    }
-    
-    // =========================================
-    // === NGO CLAIM & PICKUP FUNCTIONALITY ===
-    // =========================================
-    window.claimFood = async function(docId) {
-        if(!confirm("Are you sure you want to claim this food?")) return;
-        
-        try {
-            const docRef = doc(db, "listings", docId);
-            await updateDoc(docRef, {
-                status: "Claimed",
-                claimedBy: currentUser,
-                claimedAt: Date.now()
-            });
-            alert("Food claimed successfully! Check your Dashboard.");
-            window.showView('dashboard'); // Redirect to dashboard
-        } catch(e) {
-            console.error("Error claiming:", e);
-            alert("Error: " + e.message);
-        }
-    }
-    
-    // NEW: PICK UP FUNCTION
-    window.pickupFood = async function(docId) {
-        if(!confirm("Confirm pickup? This will mark the food as distributed.")) return;
-        
-        try {
-            const docRef = doc(db, "listings", docId);
-            await updateDoc(docRef, {
-                status: "Completed",
-                completedAt: Date.now()
-            });
-            alert("Pickup confirmed! Thank you for reducing waste.");
-        } catch(e) {
-            console.error("Error updating pickup:", e);
-            alert(e.message);
-        }
-    }
-
-    // =========================================
-    // === 6. DATA LISTENERS (Real-Time Updates) ===
-    // =========================================
-    
-    // LISTENER 1: DASHBOARD (Role Based)
-    if (userRole === 'Restaurant') {
-        const myQuery = query(listingsRef, where("createdBy", "==", currentUser));
-        onSnapshot(myQuery, (snapshot) => {
-            const myData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            cachedMyData = myData; // Save for editing
-            renderDashboardItems(myData);
-            updateDashboardStats(myData);
-        });
-    } else if (userRole === 'NGO') {
-        // Listener for Claims made by this NGO
-        const ngoQuery = query(listingsRef, where("claimedBy", "==", currentUser));
-        onSnapshot(ngoQuery, (snapshot) => {
-            const myClaims = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            renderNgoClaims(myClaims);
-            updateNgoStats(myClaims);
-        });
-    }
-
-    // LISTENER 2: BROWSE PAGE (Shows ALL Active listings)
-    const browseQuery = query(listingsRef, where("status", "==", "Active"));
-    onSnapshot(browseQuery, (snapshot) => {
-        const allActiveData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        cachedBrowseData = allActiveData; // Cache for Search/Filter
-        filterBrowse(); 
-    });
-
-    // =========================================
-    // === 7. FILTER & SEARCH LOGIC ===
-    // =========================================
-    window.setFilter = function(filterType, btnElement) {
-        currentFilterType = filterType;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            btn.classList.add('inactive');
-        });
-        btnElement.classList.remove('inactive');
-        btnElement.classList.add('active');
-        filterBrowse();
-    }
-    
-    window.filterBrowse = function() {
-        const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-        
-        const filteredData = cachedBrowseData.filter(item => {
-            const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.restaurantName.toLowerCase().includes(searchTerm);
-            let matchesFilter = true;
-            if (currentFilterType !== "All") {
-                matchesFilter = item.tags && item.tags.includes(currentFilterType);
-            }
-            return matchesSearch && matchesFilter;
-        });
-        renderBrowseCards(filteredData);
-    }
-
-    // =========================================
-    // === 8. RENDER FUNCTIONS ===
-    // =========================================
-    function renderDashboardItems(data) {
-        const container = document.getElementById("listingContainer");
-        if (!container) return;
-        container.innerHTML = "";
-
-        if (data.length === 0) {
-            container.innerHTML = "<p>No active listings yet. Create one above!</p>";
-            return;
-        }
-
-        data.sort((a, b) => b.createdAt - a.createdAt);
-
-        data.forEach((item) => {
-            let badgeClass = item.status === "Active" ? "status-active" : item.status === "Claimed" ? "status-claimed" : "status-completed";
-            let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
+            // Update map with existing address
+            updateMap(address);
             
-            // MODIFIED: Show "Claimed & Picked Up" text if completed
-            let statusText = item.status;
-            if(item.status === "Completed") statusText = "Claimed & Picked Up";
+            // Set Edit Mode
+            isEditing = true;
+            editDocId = id;
 
-            container.innerHTML += `
+            // Update Modal UI
+            // do not use second brackets in print.
+            document.getElementById('modal-title').textContent = "Edit Food Listing";
+            const createBtn = document.getElementById('modal-submit-btn');
+            // do not use second brackets in print.
+            createBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Listing';
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+            // do not use second brackets in print.
+            document.getElementById('location-status').textContent = "Location loaded from listing details.";
+
+
+            // Open the modal
+            toggleCreateModal(true);
+        }
+
+        window.cancelEdit = function () {
+            isEditing = false;
+            editDocId = null;
+            clearForm();
+
+            // Reset Modal UI
+            // do not use second brackets in print.
+            document.getElementById('modal-title').textContent = "Create Food Listing";
+            const createBtn = document.getElementById('modal-submit-btn');
+            // do not use second brackets in print.
+            createBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Post New Listing';
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+
+            // Close the modal
+            toggleCreateModal(false);
+        }
+
+        // =========================================
+        // === NGO CLAIM & PICKUP FUNCTIONALITY (MODIFIED) ===
+        // =========================================
+        window.claimFood = async function (docId) {
+            // First Confirmation: Are you sure you want to claim?
+             // MODIFIED TO USE CUSTOM CONFIRM
+            if (!await showCustomConfirm("Are you sure you want to claim this food?")) return; 
+
+            try {
+                const docRef = doc(db, "listings", docId);
+                await updateDoc(docRef, {
+                    status: "Claimed",
+                    claimedBy: currentUser,
+                    claimedAt: Date.now()
+                });
+                
+                // Second Confirmation (New): Ask if user wants to go to Dashboard or stay on Browse.
+                 // MODIFIED TO USE CUSTOM CONFIRM
+                const stayOnBrowse = await showCustomConfirm("Claim successful! Would you like to view your claims on the Dashboard now?");
+
+                if (stayOnBrowse) {
+                    // User clicked 'OK' -> Go to Dashboard
+                    window.showView('dashboard');
+                } else {
+                    // User clicked 'CANCEL' -> Stay on current view (Browse)
+                }
+
+            } catch (e) {
+                console.error("Error claiming:", e);
+                 // do not use second brackets in print.
+                showCustomAlert("Error: Claim failed.");
+            }
+        }
+
+        // NEW: PICK UP FUNCTION
+        window.pickupFood = async function (docId) {
+             // MODIFIED TO USE CUSTOM CONFIRM
+            if (!await showCustomConfirm("Confirm pickup? This will mark the food as distributed.")) return;
+
+            try {
+                const docRef = doc(db, "listings", docId);
+                await updateDoc(docRef, {
+                    status: "Completed",
+                    completedAt: Date.now()
+                });
+                 // do not use second brackets in print.
+                showCustomAlert("Pickup confirmed! Thank you for reducing waste.");
+            } catch (e) {
+                console.error("Error updating pickup:", e);
+                 // do not use second brackets in print.
+                showCustomAlert("Error confirming pickup.");
+            }
+        }
+        
+        // =========================================
+        // === NEW: BROWSE MAP MODAL FUNCTIONS ===
+        // =========================================
+        window.showRestaurantMap = function (restaurantName, address) {
+            // 1. Update the modal content
+            // do not use second brackets in print.
+            document.getElementById('browseMapTitle').textContent = `Location for ${restaurantName}`;
+            document.getElementById('browseMapAddress').textContent = address;
+            // 2. Update the embedded map iframe using the existing updateMap logic
+            updateMap(address, 'browse-restaurant-map');
+            // 3. Show the modal
+            toggleBrowseMapModal(true);
+        }
+        
+        window.toggleBrowseMapModal = function (show) {
+            const modalOverlay = document.getElementById('browseMapModal');
+            if (show) {
+                modalOverlay.classList.remove('hidden');
+            } else {
+                modalOverlay.classList.add('hidden');
+            }
+        }
+
+
+        // =========================================
+        // === 6. DATA LISTENERS (Real-Time Updates) ===
+        // =========================================
+
+        // LISTENER 1: DASHBOARD (Role Based)
+        if (userRole === 'Restaurant') {
+            const myQuery = query(listingsRef, where("createdBy", "==", currentUser));
+            onSnapshot(myQuery, (snapshot) => {
+                const myData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                cachedMyData = myData; // Save for editing and deletion (Restaurant)
+                renderDashboardItems(myData);
+                updateDashboardStats(myData);
+            });
+        } else if (userRole === 'NGO') {
+            // Listener for Claims made by this NGO
+            const ngoQuery = query(listingsRef, where("claimedBy", "==", currentUser));
+            onSnapshot(ngoQuery, (snapshot) => {
+                const myClaims = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                cachedMyData = myClaims; // Save for deletion (NGO claims)
+                renderNgoClaims(myClaims);
+                updateNgoStats(myClaims);
+            });
+        }
+
+        // LISTENER 2: BROWSE PAGE (Shows ALL Active listings)
+        const browseQuery = query(listingsRef, where("status", "==", "Active"));
+        onSnapshot(browseQuery, (snapshot) => {
+            const allActiveData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            cachedBrowseData = allActiveData; // Cache for Search/Filter and NGO cancellation
+            filterBrowse();
+        });
+
+        // =========================================
+        // === 7. FILTER & SEARCH LOGIC ===
+        // =========================================
+        window.setFilter = function (filterType, btnElement) {
+            currentFilterType = filterType;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+            });
+            btnElement.classList.remove('inactive');
+            btnElement.classList.add('active');
+            filterBrowse();
+        }
+
+        window.filterBrowse = function () {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+
+            const filteredData = cachedBrowseData.filter(item => {
+                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.restaurantName.toLowerCase().includes(searchTerm);
+                let matchesFilter = true;
+                if (currentFilterType !== "All") {
+                    matchesFilter = item.tags && item.tags.includes(currentFilterType);
+                }
+                return matchesSearch && matchesFilter;
+            });
+            renderBrowseCards(filteredData);
+        }
+
+        // =========================================
+        // === 8. RENDER FUNCTIONS ===
+        // =========================================
+        function renderDashboardItems(data) {
+            const container = document.getElementById("listingContainer");
+            if (!container) return;
+            container.innerHTML = "";
+
+            if (data.length === 0) {
+                 // do not use second brackets in print.
+                container.innerHTML = "<p>No active listings yet. Create one above!</p>";
+                return;
+            }
+
+            data.sort((a, b) => b.createdAt - a.createdAt);
+
+            data.forEach((item) => {
+                let badgeClass = item.status === "Active" ? "status-active" : item.status === "Claimed" ? "status-claimed" : "status-completed";
+                let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
+
+                // MODIFIED: Show "Claimed & Picked Up" text if completed
+                let statusText = item.status;
+                if (item.status === "Completed") statusText = "Claimed & Picked Up";
+                
+                // NEW LOGIC: Determine which buttons to show (CORRECTED IMPLEMENTATION)
+                let actionButtons = '';
+                let disabledClass = '';
+                
+                if (item.status === 'Active') {
+                     // do not use second brackets in print.
+                    actionButtons = `
+                        <button class="action-btn btn-edit" onclick="editPost('${item.id}')">Edit</button>
+                        <button class="action-btn btn-cancel" onclick="deletePost('${item.id}')">Delete</button>
+                    `;
+                } else if (item.status === 'Claimed') {
+                    // If claimed, buttons are disabled but visible
+                    disabledClass = 'btn-disabled';
+                     // do not use second brackets in print.
+                    actionButtons = `
+                        <button class="action-btn btn-edit ${disabledClass}" onclick="editPost('${item.id}')">Edit</button>
+                        <button class="action-btn btn-cancel ${disabledClass}" onclick="deletePost('${item.id}')">Delete</button>
+                    `;
+                } else if (item.status === 'Completed') {
+                    // If completed, buttons are disabled but visible
+                    disabledClass = 'btn-disabled';
+                     // do not use second brackets in print.
+                     actionButtons = `
+                        <button class="action-btn btn-edit ${disabledClass}" onclick="editPost('${item.id}')">Edit</button>
+                        <button class="action-btn btn-cancel ${disabledClass}" onclick="deletePost('${item.id}')">Delete</button>
+                     `;
+                }
+
+
+                // do not use second brackets in print.
+                container.innerHTML += `
                 <div class="listing-card">
                     <img src="${thumb}" class="list-thumb">
                     <div class="card-info">
@@ -1795,47 +2598,50 @@
                         <h3>${item.title} <span class="status-badge ${badgeClass}">${statusText}</span></h3>
                         <div class="card-meta">
                             <span><i class="fa-regular fa-user"></i> ${item.quantity}</span>
-                            <span><i class="fa-regular fa-clock"></i> ${item.pickupTime}</span>
+                            <span><i class="fa-regular fa-clock"></i> ${item.pickupTime} (${item.uploadDate})</span>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <button class="action-btn btn-edit" onclick="editPost('${item.id}')">Edit</button>
-                        <button class="action-btn btn-cancel" onclick="deletePost('${item.id}')">Delete</button>
+                        ${actionButtons}
                     </div>
                 </div>`;
-        });
-    }
-    
-    // NEW: Render NGO Claims with Details
-    function renderNgoClaims(data) {
-        const container = document.getElementById("claimsContainer");
-        if (!container) return;
-        container.innerHTML = "";
-
-        if (data.length === 0) {
-            container.innerHTML = "<p>You have no active claims. Browse available food to claim items!</p>";
-            return;
+            });
         }
 
-        data.sort((a, b) => b.claimedAt - a.claimedAt);
+        // NEW: Render NGO Claims with Details
+        function renderNgoClaims(data) {
+            const container = document.getElementById("claimsContainer");
+            if (!container) return;
+            container.innerHTML = "";
 
-        data.forEach((item) => {
-            let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
-            let vegBadge = item.tags ? `<span class="status-tag">${item.tags[0]}</span>` : '';
-            let phone = item.restaurantPhone || "N/A";
+            if (data.length === 0) {
+                 // do not use second brackets in print.
+                container.innerHTML = "<p>You have no active claims. Browse available food to claim items!</p>";
+                return;
+            }
 
-            // Determine buttons based on status
-            let actionButtons = '';
-            if(item.status === 'Claimed') {
-                actionButtons = `
+            data.sort((a, b) => b.claimedAt - a.claimedAt);
+
+            data.forEach((item) => {
+                let thumb = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop";
+                let vegBadge = item.tags ? `<span class="status-tag">${item.tags[0]}</span>` : '';
+                let phone = item.restaurantPhone || "N/A";
+
+                // Determine buttons based on status
+                let actionButtons = '';
+                if (item.status === 'Claimed') {
+                    // do not use second brackets in print.
+                    actionButtons = `
                     <button class="action-btn btn-complete" onclick="pickupFood('${item.id}')">Pick Up</button>
                     <button class="action-btn btn-cancel" onclick="deletePost('${item.id}')">Cancel</button>
                 `;
-            } else {
-                actionButtons = `<span class="status-badge status-completed">Completed</span>`;
-            }
+                } else {
+                    // do not use second brackets in print.
+                    actionButtons = `<span class="status-badge status-completed">Completed</span>`;
+                }
 
-            container.innerHTML += `
+                // do not use second brackets in print.
+                container.innerHTML += `
                 <div class="listing-card">
                     <img src="${thumb}" class="list-thumb">
                     <div class="card-info">
@@ -1852,143 +2658,331 @@
                          ${actionButtons}
                     </div>
                 </div>`;
-        });
-    }
-
-    function renderBrowseCards(data) {
-        const grid = document.getElementById("foodGrid");
-        const countSpan = document.getElementById("count");
-        if (!grid) return;
-
-        if (countSpan) countSpan.innerText = data.length;
-        grid.innerHTML = "";
-
-        if (data.length === 0) {
-            grid.innerHTML = `<div class="no-results">No listings match your search.</div>`;
-            return;
+            });
         }
 
-        data.forEach(item => {
-            const displayImg = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500";
-            let tagsHtml = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("");
+        // MODIFIED: Added map icon to the restaurant name line
+        function renderBrowseCards(data) {
+            const grid = document.getElementById("foodGrid");
+            const countSpan = document.getElementById("count");
+            if (!grid) return;
 
-            grid.innerHTML += `
+            if (countSpan) countSpan.innerText = data.length;
+            grid.innerHTML = "";
+
+            if (data.length === 0) {
+                 // do not use second brackets in print.
+                grid.innerHTML = `<div class="no-results">No listings match your search.</div>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const displayImg = item.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500";
+                let tagsHtml = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("");
+                
+                // Get the restaurant name and address for the map click handler
+                const restName = item.restaurantName.replace(/'/g, "\\'"); // Escape single quotes
+                const restAddress = item.restaurantAddress.replace(/'/g, "\\'"); // Escape single quotes
+
+                // do not use second brackets in print.
+                grid.innerHTML += `
                 <div class="food-card">
                     <div class="card-img-container">
                         <img src="${displayImg}" class="card-img"> 
                         <div class="card-tags">${tagsHtml}</div>
                     </div>
                     <div class="card-content">
-                        <div class="restaurant-name">${item.restaurantName}</div>
+                        <div class="restaurant-name">
+                            <span>${item.restaurantName}</span>
+                            <i class="fa-solid fa-map-pin restaurant-map-icon" 
+                                onclick="showRestaurantMap('${restName}', '${restAddress}')"
+                                title="View Map for ${restName}">
+                            </i>
+                        </div>
                         <h3 class="dish-title">${item.title}</h3>
                         <p class="dish-desc">${item.description || 'Freshly prepared surplus food.'}</p>
                         <div class="meta-row">
                             <div class="meta-item"><i class="fa-regular fa-user"></i> ${item.quantity}</div>
-                            <div class="meta-item time"><i class="fa-regular fa-clock"></i> ${item.pickupTime}</div>
+                            <div class="meta-item time">
+                                <i class="fa-regular fa-clock"></i> 
+                                ${item.pickupTime} 
+                                (${item.uploadDate})
+                            </div>
                         </div>
                         <button class="btn-claim" onclick="claimFood('${item.id}')">Claim This Food</button>
                     </div>
                 </div>`;
+            });
+        }
+
+        function updateDashboardStats(data) {
+            const active = data.filter(i => i.status === "Active").length;
+            const claimed = data.filter(i => i.status === "Claimed").length;
+            const completed = data.filter(i => i.status === "Completed").length;
+            const mealsCount = data.filter(i => i.status === "Completed")
+                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
+
+            const stats = document.querySelectorAll('#stats-restaurant .stat-number');
+            if (stats.length >= 4) {
+                stats[0].innerText = active;
+                stats[1].innerText = claimed;
+                stats[2].innerText = completed;
+                stats[3].innerText = mealsCount;
+            }
+        }
+
+        function updateNgoStats(data) {
+            // Scheduled: Currently Active Claims
+            const scheduled = data.filter(i => i.status === "Claimed").length;
+            // Total Claimed: All items ever claimed (Claimed + Completed)
+            const total = data.length;
+            // Meals Distributed: Completed items
+            const distributed = data.filter(i => i.status === "Completed")
+                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
+            // Partner Restaurants: Unique restaurant names
+            const partners = new Set(data.map(i => i.restaurantName)).size;
+
+            const stats = document.querySelectorAll('#stats-ngo .stat-number');
+            if (stats.length >= 4) {
+                stats[0].innerText = scheduled;
+                stats[1].innerText = total;
+                stats[2].innerText = distributed;
+                stats[3].innerText = partners;
+            }
+        }
+
+        // =========================================
+        // === 9. GLOBAL UTILITIES (MODIFIED deletePost) ===
+        // =========================================
+        window.deletePost = async function (docId) {
+            // Try to find the item in either cache
+            let itemToDelete = cachedMyData.find(i => i.id === docId) || cachedBrowseData.find(i => i.id === docId);
+            
+            if (!itemToDelete) return; // Should not happen if called from the UI
+
+            // Determine confirmation message based on role/status
+            let confirmationMessage = '';
+            let isCancelClaim = false;
+            
+            if (userRole === 'NGO' && itemToDelete.status === 'Claimed') {
+                 // do not use second brackets in print.
+                confirmationMessage = "Cancel this claim? This will make the food available for other NGOs to claim.";
+                isCancelClaim = true;
+            } else if (userRole === 'Restaurant' && itemToDelete.status === 'Active') {
+                 // do not use second brackets in print.
+                confirmationMessage = "Delete this listing permanently?";
+            } else if (userRole === 'Restaurant' && itemToDelete.status === 'Claimed') {
+                 // do not use second brackets in print.
+                 confirmationMessage = "WARNING: Cancel this listing? This will void the claim made by an NGO and permanently delete the post.";
+            } else if (userRole === 'Restaurant' && itemToDelete.status === 'Completed') {
+                 // do not use second brackets in print.
+                 confirmationMessage = "Delete this completed record permanently?";
+            } else {
+                 // do not use second brackets in print.
+                 confirmationMessage = "Delete this item permanently?";
+            }
+
+
+            // --- EXECUTE DELETION/CANCELLATION ---
+             // MODIFIED TO USE CUSTOM CONFIRM
+            if (await showCustomConfirm(confirmationMessage)) {
+                try {
+                    const docRef = doc(db, "listings", docId);
+                    
+                    if (isCancelClaim) {
+                        // NGO cancelling a claim
+                        await updateDoc(docRef, {
+                            status: "Active",
+                            claimedBy: null, // Clear the claimedBy field
+                            claimedAt: null  // Clear the claimedAt timestamp
+                        });
+                         // do not use second brackets in print.
+                        showCustomAlert("Claim cancelled successfully!");
+                    } else {
+                        // Restaurant deleting/cancelling listing (Active, Claimed, or Completed)
+                        await deleteDoc(docRef);
+                         // do not use second brackets in print.
+                        showCustomAlert("Listing deleted successfully.");
+                    }
+                } catch (e) {
+                    console.error("Error deleting/cancelling item:", e);
+                     // do not use second brackets in print.
+                    showCustomAlert("Error deleting/cancelling item.");
+                }
+            }
+        }
+
+        window.logout = function () {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        window.showView = function (viewId) {
+            document.querySelectorAll('.view-home, #view-dashboard, #view-browse, #view-how').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            const targetView = document.getElementById('view-' + viewId);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+                const navItem = document.getElementById('nav-' + viewId);
+                if (navItem) navItem.classList.add('active');
+            }
+        }
+
+        // =========================================
+        // === 10. ROLE-BASED UI INITIALIZATION ===
+        // =========================================
+
+        // Set initial view and HOW IT WORKS section based on Role
+        if (userRole === 'NGO') {
+            // UI for NGO
+            document.getElementById("nav-browse").classList.remove('hidden');
+            document.getElementById("dashboard-restaurant-content").classList.add("hidden");
+            document.getElementById("dashboard-ngo-content").classList.remove("hidden");
+
+            // Fix How It Works for NGO: Hide toggle, show only NGO steps
+            document.getElementById("hiw-toggle-container").classList.add("hidden");
+            document.getElementById("hiw-flow-restaurant").classList.add("hidden");
+            document.getElementById("hiw-flow-ngo").classList.remove("hidden");
+
+        } else {
+            // UI for Restaurant
+            document.getElementById("nav-browse").classList.add('hidden');
+            document.getElementById("dashboard-restaurant-content").classList.remove("hidden");
+            document.getElementById("dashboard-ngo-content").classList.add("hidden");
+
+            // Fix How It Works for Restaurant: Hide toggle, show only Restaurant steps
+            document.getElementById("hiw-toggle-container").classList.add("hidden");
+            document.getElementById("hiw-flow-restaurant").classList.remove("hidden");
+            document.getElementById("hiw-flow-ngo").classList.add("hidden");
+        }
+
+        // Toggle FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                item.parentElement.classList.toggle('active');
+            });
         });
-    }
 
-    function updateDashboardStats(data) {
-         const active = data.filter(i => i.status === "Active").length;
-         const claimed = data.filter(i => i.status === "Claimed").length;
-         const completed = data.filter(i => i.status === "Completed").length;
-         const mealsCount = data.filter(i => i.status === "Completed")
-                                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
-
-         const stats = document.querySelectorAll('#stats-restaurant .stat-number');
-         if(stats.length >= 4) {
-             stats[0].innerText = active;
-             stats[1].innerText = claimed;
-             stats[2].innerText = completed;
-             stats[3].innerText = mealsCount;
-         }
-    }
-    
-    function updateNgoStats(data) {
-        // Scheduled: Currently Active Claims
-        const scheduled = data.filter(i => i.status === "Claimed").length;
-        // Total Claimed: All items ever claimed (Claimed + Completed)
-        const total = data.length; 
-        // Meals Distributed: Completed items
-        const distributed = data.filter(i => i.status === "Completed")
-                                .reduce((acc, curr) => acc + (parseInt(curr.quantity) || 0), 0);
-        // Partner Restaurants: Unique restaurant names
-        const partners = new Set(data.map(i => i.restaurantName)).size;
-
-        const stats = document.querySelectorAll('#stats-ngo .stat-number');
-        if(stats.length >= 4) {
-            stats[0].innerText = scheduled;
-            stats[1].innerText = total;
-            stats[2].innerText = distributed;
-            stats[3].innerText = partners;
-        }
-    }
-
-    // =========================================
-    // === 9. GLOBAL UTILITIES ===
-    // =========================================
-    window.deletePost = async function(docId) {
-        if (confirm("Delete this listing permanently?")) {
-            await deleteDoc(doc(db, "listings", docId));
-        }
-    }
-
-    window.logout = function() {
-        localStorage.clear();
-        window.location.href = "login.html";
-    }
-
-    window.showView = function(viewId) {
-        document.querySelectorAll('.view-home, #view-dashboard, #view-browse, #view-how').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        // =========================================
+        // === NEW: PROFILE MODAL FUNCTIONS (MODIFIED) ===
+        // =========================================
         
-        const targetView = document.getElementById('view-' + viewId);
-        if (targetView) {
-            targetView.classList.remove('hidden');
-            const navItem = document.getElementById('nav-' + viewId);
-            if(navItem) navItem.classList.add('active');
+        // NEW: Handler for profile photo upload
+        window.handleProfilePhotoUpload = async function (input) {
+            if (input.files && input.files.length > 0) {
+                const file = input.files[0];
+                if (file.size > 500 * 1024) { // Limit to 500KB
+                    // do not use second brackets in print.
+                    showCustomAlert("Image is too large! Max 500KB.");
+                    return;
+                }
+                
+                try {
+                    const imageBase64 = await convertBase64(file);
+                    
+                    // Save to localStorage using the current user as the key
+                    localStorage.setItem(`profilePhoto_${currentUser}`, imageBase64); 
+                    
+                    // Update UI immediately
+                    updateProfileAvatar(imageBase64);
+                    // do not use second brackets in print.
+                    showCustomAlert("Profile photo uploaded successfully!");
+                    
+                } catch (e) {
+                    console.error("Error uploading profile photo:", e);
+                    // do not use second brackets in print.
+                    showCustomAlert("Error processing image.");
+                }
+            }
         }
-    }
-    
-    // =========================================
-    // === 10. ROLE-BASED UI INITIALIZATION ===
-    // =========================================
-    
-    // Set initial view and HOW IT WORKS section based on Role
-    if (userRole === 'NGO') {
-         // UI for NGO
-         document.getElementById("nav-browse").classList.remove('hidden');
-         document.getElementById("dashboard-restaurant-content").classList.add("hidden");
-         document.getElementById("dashboard-ngo-content").classList.remove("hidden");
-         
-         // Fix How It Works for NGO: Hide toggle, show only NGO steps
-         document.getElementById("hiw-toggle-container").classList.add("hidden");
-         document.getElementById("hiw-flow-restaurant").classList.add("hidden");
-         document.getElementById("hiw-flow-ngo").classList.remove("hidden");
-         
-    } else {
-         // UI for Restaurant
-         document.getElementById("nav-browse").classList.add('hidden');
-         document.getElementById("dashboard-restaurant-content").classList.remove("hidden");
-         document.getElementById("dashboard-ngo-content").classList.add("hidden");
-         
-         // Fix How It Works for Restaurant: Hide toggle, show only Restaurant steps
-         document.getElementById("hiw-toggle-container").classList.add("hidden");
-         document.getElementById("hiw-flow-restaurant").classList.remove("hidden");
-         document.getElementById("hiw-flow-ngo").classList.add("hidden");
-    }
-    
-    // Toggle FAQ
-    document.querySelectorAll('.faq-question').forEach(item => {
-        item.addEventListener('click', () => {
-            item.parentElement.classList.toggle('active');
-        });
-    });
-</script>
+        
+        // NEW: Function to update the avatar display
+        function updateProfileAvatar(imageBase64) {
+            const avatarIcon = document.querySelector('#profileAvatar i');
+            const avatarImage = document.getElementById('profileImage');
+            
+            if (imageBase64) {
+                avatarImage.src = imageBase64;
+                avatarImage.classList.remove('hidden');
+                if (avatarIcon) avatarIcon.classList.add('hidden');
+            } else {
+                avatarImage.classList.add('hidden');
+                avatarImage.src = '';
+                if (avatarIcon) avatarIcon.classList.remove('hidden');
+            }
+        }
+
+        window.toggleProfileModal = function (event) {
+            // Prevent the button click from triggering other events
+            if (event) event.stopPropagation();
+
+            const modalOverlay = document.getElementById('profileModal');
+            const isHidden = modalOverlay.classList.contains('hidden');
+
+            if (isHidden) {
+                // Retrieve all necessary information
+                // do not use second brackets in print.
+                const name = localStorage.getItem("loggedInUser") || 'N/A';
+                // do not use second brackets in print.
+                const email = localStorage.getItem("loggedInEmail") || 'N/A';
+                // do not use second brackets in print.
+                const role = localStorage.getItem("loggedInRole") || 'N/A';
+                
+                // NEW: Retrieve the photo for the current user
+                const photoBase64 = localStorage.getItem(`profilePhoto_${currentUser}`);
+
+
+                // Populate the modal
+                document.getElementById('profileName').textContent = name;
+                document.getElementById('profileEmail').textContent = email;
+                document.getElementById('profileRole').textContent = role;
+                
+                // Update the avatar visual
+                updateProfileAvatar(photoBase64);
+
+                modalOverlay.classList.remove('hidden');
+                // Optional: Close modal if user clicks outside of it
+                document.addEventListener('click', closeProfileModalOutside);
+
+            } else {
+                modalOverlay.classList.add('hidden');
+                document.removeEventListener('click', closeProfileModalOutside);
+            }
+        }
+
+        // Helper function to close the modal when clicking outside
+        function closeProfileModalOutside(event) {
+            const modal = document.querySelector('.profile-modal');
+            const button = document.querySelector('.profile-btn');
+            const fileInput = document.getElementById('profile-photo-upload');
+
+            // Check if the click is on the file input or its label, so the file dialog works
+            if (fileInput && (fileInput === event.target || fileInput.previousElementSibling === event.target)) {
+                return; 
+            }
+
+            // If the click is not inside the modal, and not on the profile button itself, close it.
+            if (!modal.contains(event.target) && !button.contains(event.target)) {
+                document.getElementById('profileModal').classList.add('hidden');
+                document.removeEventListener('click', closeProfileModalOutside);
+            }
+        }
+
+        // === NEW: LISTING MODAL FUNCTIONS ===
+        window.toggleCreateModal = function (show) {
+            const modalOverlay = document.getElementById('listingModal');
+            if (show) {
+                modalOverlay.classList.remove('hidden');
+            } else {
+                modalOverlay.classList.add('hidden');
+                if (isEditing) {
+                    cancelEdit();
+                }
+            }
+        }
+    </script>
 </body>
+
 
 </html>
