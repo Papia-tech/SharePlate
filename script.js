@@ -1195,4 +1195,11 @@ themeBtn.addEventListener('click', () => {
         icon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
     }
+
 });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
+  });
+}
