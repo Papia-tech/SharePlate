@@ -24,6 +24,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -41,14 +44,16 @@
         </nav>
 
         <div class="header-actions">
-            <button id="pwaInstallBtn" class="nav-item"
-                style="display: block; background: #2d7a4d; color: white; border: none; font-weight: 600;">
-                Install App
+            <button id="theme-toggle" class="theme-toggle" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon"></i>
             </button>
             <button class="profile-btn" onclick="toggleProfileModal(event)">
                 <i class="fa-solid fa-user-circle"></i>
             </button>
-            <a onclick="logout()" class="btn-signin">Sign Out</a>
+            <button id="pwaInstallBtn" class="nav-item"
+                style="display: block; background: #2d7a4d; color: white; border: none; font-weight: 600;">
+                Install App
+            </button>
         </div>
     </header>
 
@@ -355,11 +360,34 @@
                     <input type="file" id="profile-photo-upload" accept="image/*"
                         onchange="handleProfilePhotoUpload(this)">
                 </div>
-                <div class="profile-info">
+
+                <div class="profile-info" id="profileDisplayArea">
                     <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
-                    <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail" style="opacity: 0.7;">Loading...</span></p>
                     <p><strong>Role:</strong> <span id="profileRole">Loading...</span></p>
+                    <button onclick="toggleEditProfile(true)" class="action-btn btn-edit"
+                        style="width: 100%; margin-top: 15px;">
+                        <i class="fa-solid fa-user-pen"></i> Edit Name
+                    </button>
                 </div>
+
+                <div class="profile-info hidden" id="profileEditArea">
+                    <p style="margin-bottom: 10px; font-size: 13px; color: var(--text-muted);">Update your display name:
+                    </p>
+                    <input type="text" id="editProfileName" class="search-input"
+                        style="width: 100%; padding: 10px; margin-bottom: 15px;" placeholder="New Name">
+
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="saveProfileName()" class="create-btn"
+                            style="flex: 1; padding: 10px;">Save</button>
+                        <button onclick="toggleEditProfile(false)" class="action-btn btn-cancel"
+                            style="flex: 1; padding: 10px;">Cancel</button>
+                    </div>
+                </div>
+
+                <button onclick="logout()" class="btn-logout-modal">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
             </div>
         </div>
     </div>
@@ -391,7 +419,8 @@
             </div>
             <div class="listing-form">
                 <div class="form-grid">
-                    <input type="text" id="restaurant-name" placeholder="Restaurant Name">
+                    <input type="text" id="restaurant-name" placeholder="Restaurant Name" readonly
+                        class="readonly-input">
 
                     <div class="phone-input-group">
                         <select id="country-code-select">

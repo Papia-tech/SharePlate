@@ -1,15 +1,26 @@
+let net;
+
+// Load the ML model once when the app starts
+async function loadMLModel() {
+    console.log('Loading ML model...');
+    net = await mobilenet.load();
+    console.log('Model loaded successfully!');
+}
+loadMLModel();
+
 // FIREBASE FUNCTIONS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, updateDoc, onSnapshot, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // FIREBASE CONFIGURATION
 const firebaseConfig = {
-    apiKey: "AIzaSyCaC0u5W3JG1Wmo0FAMmHTOYVrR0KUf8Mw",
-    authDomain: "shareplate-free.firebaseapp.com",
-    projectId: "shareplate-free",
-    messagingSenderId: "407885827230",
-    appId: "1:407885827230:web:a9996e34dde6de896cff8f",
-    measurementId: "G-QSDJ5NGNTZ"
+    apiKey: "AIzaSyCCmwlaccAVrpH28cOsAnHAahfJec4Tgyc",
+    authDomain: "shareplate-b6397.firebaseapp.com",
+    projectId: "shareplate-b6397",
+    storageBucket: "shareplate-b6397.firebasestorage.app",
+    messagingSenderId: "557590065392",
+    appId: "1:557590065392:web:bcb9d10f40de8b9c2c1235",
+    measurementId: "G-DEL9JRXB5X"
 };
 
 // INITIALIZE APP & DATABASE
@@ -19,7 +30,8 @@ const listingsRef = collection(db, "listings");
 
 // CHECK LOGIN STATUS
 const isLoggedIn = localStorage.getItem("loggedIn");
-const currentUser = localStorage.getItem("loggedInUser"); // Used to filter "My Listings"
+// Change 'const' to 'let' so we can update this value later
+let currentUser = localStorage.getItem("loggedInUser");
 const userRole = localStorage.getItem("loggedInRole");
 
 // Edit State Variables
@@ -222,6 +234,50 @@ window.getCurrentLocation = function () {
     }
 }
 
+async function verifyFoodFreshness(imageElement, userInputName) {
+    if (!net) return true;
+
+    const predictions = await net.classify(imageElement);
+    console.log("AI Analysis:", predictions);
+    
+    const input = userInputName.toLowerCase();
+
+    // 1. DANGER ZONE: Labels that often indicate non-fresh or non-food items
+    // If the AI is confident about these, we reject the food.
+    const spoiledKeywords = ['fungus', 'mold', 'bacteria', 'decay', 'rotten', 'trash', 'garbage', 'scavenger'];
+    
+    const looksSpoiled = predictions.some(p => 
+        spoiledKeywords.some(key => p.className.toLowerCase().includes(key)) && p.probability > 0.10
+    );
+
+    if (looksSpoiled) {
+        console.log("Freshness Check: Failed (Potential spoilage detected)");
+        return false; 
+    }
+
+    // 2. SYNONYM MAP (To keep your "Name Match" feature working)
+    const synonyms = {
+        'rice': ['rice', 'boiled rice', 'paddy', 'grain', 'risotto'],
+        'roti': ['bread', 'dough', 'flatbread', 'naan'],
+        'curry': ['stew', 'soup', 'pot', 'gravy', 'sauce'],
+        'momo': ['dumpling', 'dough', 'bun'],
+        'dal': ['soup', 'stew', 'lentil']
+    };
+
+    let acceptedLabels = [input, 'food', 'dish', 'meal', 'cuisine', 'plate', 'tableware'];
+    for (let key in synonyms) {
+        if (input.includes(key)) acceptedLabels = acceptedLabels.concat(synonyms[key]);
+    }
+
+    // 3. FINAL VERIFICATION
+    // Must be recognized as food/user-input AND not be in the "Danger Zone"
+    const isFreshFood = predictions.some(p => 
+        acceptedLabels.some(label => p.className.toLowerCase().includes(label)) && p.probability > 0.05
+    );
+
+    return isFreshFood;
+}
+
 // =========================================
 // === 5. LISTING FUNCTION ===
 // =========================================
@@ -262,17 +318,46 @@ window.addPost = async function () {
     try {
         let imageString = "";
 
-        // CONVERT IMAGE TO STRING
+        // --- UPDATED IMAGE & AI VERIFICATION BLOCK ---
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
+
+            // 1. Check file size
             if (file.size > 800 * 1024) {
                 showCustomAlert("Image is too large! Max 800KB.");
                 createBtn.innerHTML = originalBtnText;
                 createBtn.disabled = false;
                 return;
             }
+
+            // 2. Convert to Base64
             imageString = await convertBase64(file);
+
+            // 3. Create a temporary image for AI analysis
+            const tempImg = new Image();
+
+            // 4. Wait for the image to fully LOAD and DECODE
+            await new Promise((resolve, reject) => {
+                tempImg.onload = resolve;
+                tempImg.onerror = reject;
+                tempImg.src = imageString;
+            });
+
+            if ('decode' in tempImg) {
+                await tempImg.decode();
+            }
+
+            // 5. Run the AI check
+            const isValidFood = await verifyFoodFreshness(tempImg, title);
+
+            if (!isValidFood) {
+                showCustomAlert(`⚠️ AI Check Failed: The image does not look like "${title}". Please upload a matching photo.`);
+                // ... reset button logic ...
+                return;
+            }
         }
+        // --- END OF UPDATED BLOCK ---
+        // ... rest of the firebase addDoc code ...
 
         // Get Current Time and Date
         const now = new Date();
@@ -950,6 +1035,59 @@ window.toggleProfileModal = function (event) {
     }
 }
 
+// Toggle between View and Edit mode for the Name
+window.toggleEditProfile = function(isEditing) {
+    const displayArea = document.getElementById('profileDisplayArea');
+    const editArea = document.getElementById('profileEditArea');
+    
+    if (isEditing) {
+        displayArea.classList.add('hidden');
+        editArea.classList.remove('hidden');
+        document.getElementById('editProfileName').value = localStorage.getItem("loggedInUser");
+    } else {
+        displayArea.classList.remove('hidden');
+        editArea.classList.add('hidden');
+    }
+}
+
+// Save Name change to Firestore and LocalStorage
+window.saveProfileName = async function() {
+    const newName = document.getElementById('editProfileName').value.trim();
+    const storedUid = localStorage.getItem("userUid"); 
+
+    if (!newName) {
+        showCustomAlert("Name cannot be empty.");
+        return;
+    }
+
+    try {
+        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        const { getAuth, updateProfile } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js");
+        
+        const auth = getAuth();
+        const userDocRef = doc(db, "users", storedUid); 
+        
+        // 1. Update Database
+        await setDoc(userDocRef, { name: newName }, { merge: true });
+
+        // 2. Update Auth Profile (Critical for re-login persistence)
+        if (auth.currentUser) {
+            await updateProfile(auth.currentUser, { displayName: newName });
+        }
+
+        // 3. Update Local session
+        localStorage.setItem("loggedInUser", newName);
+        currentUser = newName; // This updates the global variable in script.js
+        
+        document.getElementById('profileName').textContent = newName;
+        showCustomAlert("Name updated successfully!");
+        toggleEditProfile(false);
+    } catch (error) {
+        console.error("Error updating name:", error);
+        showCustomAlert("Failed to update name.");
+    }
+}
+
 // Helper function to close the modal when clicking outside
 function closeProfileModalOutside(event) {
     const modal = document.querySelector('.profile-modal');
@@ -974,13 +1112,14 @@ function closeProfileModalOutside(event) {
 window.toggleCreateModal = function (show) {
     const modalOverlay = document.getElementById('listingModal');
     if (show) {
+        // --- NEW: Automatically fill the restaurant name ---
+        const nameInput = document.getElementById("restaurant-name");
+        nameInput.value = currentUser || "Unknown Restaurant"; 
+        
         modalOverlay.classList.remove('hidden');
     } else {
         modalOverlay.classList.add('hidden');
-        // If closing, ensure we reset the form state if it was an edit
-        if (isEditing) {
-            cancelEdit();
-        }
+        if (isEditing) cancelEdit();
     }
 }
 
@@ -1031,3 +1170,29 @@ window.submitRating = async function () {
         showCustomAlert("Rating submission failed");
     }
 };
+
+// =========================================
+// === THEME TOGGLE LOGIC ===
+// =========================================
+const themeBtn = document.getElementById('theme-toggle');
+const body = document.body;
+const icon = themeBtn.querySelector('i');
+
+// Check for saved theme in localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    body.classList.add('dark-mode');
+    icon.classList.replace('fa-moon', 'fa-sun');
+}
+
+themeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+    }
+});

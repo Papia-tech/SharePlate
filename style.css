@@ -1,4 +1,4 @@
-/* === SHARED & GLOBAL STYLES === */
+/* === 1. UPDATED THEME VARIABLES === */
 :root {
     --bg-body: #fbfbfb;
     --bg-card: #ffffff;
@@ -6,12 +6,143 @@
     --text-muted: #666;
     --primary-green: #2d7a4d;
     --light-green-bg: #e6f2ed;
-    --card-bg: #ffffff;
-    --dashed-border: #a8d5c2;
+    --border-color: #eeeeee;
+    --input-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.03);
+    --hover-shadow: rgba(0, 0, 0, 0.08);
+
+    /* Pills/Badges */
     --active-pill: #10b981;
     --claimed-pill: #d97706;
     --completed-pill: #9ca3af;
-    --tag-bg: #ffffff;
+}
+
+body.dark-mode {
+    --bg-body: #121212;
+    --bg-card: #1e1e1e;
+    --text-dark: #f0f0f0;
+    --text-muted: #b0b0b0;
+    --primary-green: #4ade80;
+    --light-green-bg: #1a2e25;
+    --border-color: #333333;
+    --input-bg: #2a2a2a;
+    --card-shadow: rgba(0, 0, 0, 0.4);
+    --hover-shadow: rgba(0, 0, 0, 0.6);
+}
+
+/* === DARK MODE GLOBAL OVERRIDES === */
+body.dark-mode .hero-content .hero-title,
+body.dark-mode .section-header h2,
+body.dark-mode .dish-title,
+body.dark-mode .modal-header h2,
+body.dark-mode .dashboard-text h1,
+body.dark-mode .logo,
+body.dark-mode .section-title,
+body.dark-mode h3 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .hero-content .hero-sub,
+body.dark-mode .section-header p,
+body.dark-mode .dish-desc,
+body.dark-mode .stat-label,
+body.dark-mode .card-meta,
+body.dark-mode .card-meta span,
+body.dark-mode .ngo-detail-item {
+    color: var(--text-muted) !important;
+}
+
+body.dark-mode .nav-item {
+    color: #bbb;
+}
+
+body.dark-mode .stat-card,
+body.dark-mode .feature-card,
+body.dark-mode .faq-item,
+body.dark-mode .listing-card,
+body.dark-mode .food-card,
+body.dark-mode .listing-modal,
+body.dark-mode .profile-modal {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+body.dark-mode .listing-form,
+body.dark-mode .modal-body {
+    background: var(--bg-card) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+
+/* Fix for Food Card Hover in Dark Mode */
+body.dark-mode .food-card:hover,
+body.dark-mode .feature-card:hover,
+body.dark-mode .stat-card:hover,
+body.dark-mode .listing-card:hover {
+    background: #252525 !important;
+    /* Slightly lighter than card bg to show depth */
+    box-shadow: 0 10px 30px var(--hover-shadow) !important;
+}
+
+body.dark-mode .form-grid input,
+body.dark-mode .form-grid textarea,
+body.dark-mode .form-grid select,
+body.dark-mode .search-input,
+body.dark-mode .phone-input-group select,
+body.dark-mode .address-input-container input {
+    background: var(--input-bg) !important;
+    color: #ffffff !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Readonly Input Styling */
+.readonly-input {
+    background-color: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    color: #999 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
+body.dark-mode .readonly-input {
+    background-color: #252525 !important;
+    border: 1px solid #444 !important;
+    color: #666 !important;
+}
+
+/* === REMAINING ORIGINAL CODE === */
+.btn-logout-modal {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background: #dc2626;
+    color: #ffffff;
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-logout-modal:hover {
+    transform: translateY(-2px);
+}
+
+body.dark-mode .btn-logout-modal {
+    background: transparent;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+body.dark-mode .btn-logout-modal:hover {
+    background: #ef4444;
+    color: #fff;
 }
 
 #customToast {
@@ -34,7 +165,6 @@
     opacity: 1;
 }
 
-/* Scrollbar */
 html {
     overflow-y: scroll;
 }
@@ -64,6 +194,7 @@ body {
     background: var(--bg-body);
     color: var(--text-dark);
     padding-top: 80px;
+    transition: background 0.3s, color 0.3s;
 }
 
 .hidden {
@@ -76,13 +207,14 @@ body {
     padding: 0 20px;
 }
 
-/* === HEADER === */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: #ffffff;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-dark);
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;
@@ -149,19 +281,21 @@ body {
     align-items: center;
 }
 
-.btn-signin {
-    text-decoration: none;
-    color: #1a4d2e;
-    font-weight: 600;
-    font-size: 14px;
+.theme-toggle {
+    background: var(--light-green-bg);
+    color: var(--primary-green);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
 }
 
-/* ========================================= */
-/* === HOME SPECIFIC STYLES === */
-/* ========================================= */
-
-/* === HERO SECTION === */
 .container .view-home {
     max-width: 1050px;
     margin: 0 auto;
@@ -256,7 +390,6 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* === STATS BANNER === */
 .stats-banner {
     background: #1a4d2e;
     border-radius: 20px;
@@ -285,7 +418,6 @@ body {
     opacity: 0.8;
 }
 
-/* === WHY SECTION === */
 .why-section {
     margin-bottom: 80px;
 }
@@ -312,15 +444,17 @@ body {
 }
 
 .feature-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--hover-shadow);
 }
 
 .feature-icon {
@@ -348,14 +482,14 @@ body {
     line-height: 1.5;
 }
 
-/* === FAQ SECTION === */
 .faq-section {
     max-width: 800px;
     margin: 0 auto 80px auto;
 }
 
 .faq-item {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     margin-bottom: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
@@ -389,7 +523,6 @@ body {
     transform: rotate(180deg);
 }
 
-/* === FOOTER === */
 .footer {
     text-align: center;
     padding: 40px;
@@ -413,9 +546,6 @@ body {
     color: #1a4d2e;
 }
 
-/* ========================================= */
-/* === DASHBOARD SPECIFIC STYLES === */
-/* ========================================= */
 #view-dashboard,
 #view-browse,
 #view-how {
@@ -448,11 +578,11 @@ body {
 .form-grid select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 14px;
     outline: none;
-    background: white;
 }
 
 .form-group-full {
@@ -528,13 +658,14 @@ body {
 }
 
 .stat-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 24px;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     position: relative;
     height: 120px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s;
 }
 
 .stat-card:hover {
@@ -592,7 +723,8 @@ body {
 }
 
 .listing-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
@@ -600,7 +732,7 @@ body {
     align-items: center;
     gap: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-    border: 1px solid #eee;
+    transition: transform 0.2s, background 0.2s;
 }
 
 .list-thumb {
@@ -740,9 +872,6 @@ body {
     background: #0d9668;
 }
 
-/* ========================================= */
-/* === HOW IT WORKS SPECIFIC STYLES === */
-/* ========================================= */
 .hiw-hero {
     text-align: center;
     margin-bottom: 60px;
@@ -770,7 +899,8 @@ body {
 }
 
 .toggle-bg {
-    background: #e5e7eb;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 5px;
     border-radius: 30px;
     display: flex;
@@ -807,13 +937,13 @@ body {
 }
 
 .step-card {
-    background: var(--card-bg);
+    background: var(--bg-card);
     padding: 40px 30px;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     position: relative;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background 0.2s;
 }
 
 .step-card:hover {
@@ -855,7 +985,6 @@ body {
     font-family: 'Merriweather', serif;
     font-size: 18px;
     margin-bottom: 12px;
-    color: var(--text-dark);
 }
 
 .step-card p {
@@ -902,9 +1031,6 @@ body {
     line-height: 1.5;
 }
 
-/* ========================================= */
-/* === BROWSE FOOD SPECIFIC STYLES === */
-/* ========================================= */
 .browse-hero {
     margin-bottom: 40px;
 }
@@ -946,9 +1072,9 @@ body {
 .search-input {
     width: 100%;
     padding: 12px 12px 12px 40px;
-    border: 1px solid #e5e7eb;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: #fbfbfb;
     font-size: 14px;
     outline: none;
 }
@@ -1003,17 +1129,19 @@ body {
 }
 
 .food-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .food-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--hover-shadow);
 }
 
 .card-img-container {
@@ -1067,7 +1195,6 @@ body {
     align-items: center;
 }
 
-/* NEW: Map icon style */
 .restaurant-map-icon {
     font-size: 14px;
     color: #2d7a4d;
@@ -1085,7 +1212,6 @@ body {
     font-family: 'Merriweather', serif;
     font-size: 18px;
     font-weight: 700;
-    color: var(--text-dark);
     margin-bottom: 8px;
 }
 
@@ -1140,7 +1266,6 @@ body {
     background: #2d7a4d;
 }
 
-/* PROFILE BUTTON */
 .profile-btn {
     background: var(--light-green-bg);
     color: var(--primary-green);
@@ -1161,7 +1286,6 @@ body {
     color: white;
 }
 
-/* PROFILE MODAL STYLES */
 .profile-modal-overlay {
     position: fixed;
     top: 0;
@@ -1176,7 +1300,8 @@ body {
 }
 
 .profile-modal {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     width: 90%;
     max-width: 400px;
@@ -1187,7 +1312,6 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Animation when modal is visible */
 .profile-modal-overlay:not(.hidden) .profile-modal {
     transform: scale(1);
     opacity: 1;
@@ -1205,7 +1329,6 @@ body {
 .modal-header h2 {
     font-family: 'Merriweather', serif;
     font-size: 22px;
-    color: var(--text-dark);
 }
 
 .modal-close-btn {
@@ -1269,7 +1392,6 @@ body {
     display: none;
 }
 
-
 .profile-info p {
     font-size: 15px;
     margin-bottom: 8px;
@@ -1283,7 +1405,6 @@ body {
     margin-right: 5px;
 }
 
-/* --- MODAL STYLES FOR LISTING FORM --- */
 .listing-modal-overlay {
     position: fixed;
     top: 0;
@@ -1300,7 +1421,8 @@ body {
 }
 
 .listing-modal {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     width: 90%;
     max-width: 700px;
@@ -1326,7 +1448,6 @@ body {
     box-shadow: none;
 }
 
-/* === Phone Input Styling === */
 .phone-input-group {
     display: flex;
     gap: 5px;
@@ -1348,7 +1469,6 @@ body {
     width: auto;
 }
 
-/* Map specific styles */
 .map-wrapper {
     grid-column: 1 / -1;
     padding: 10px 0;
@@ -1403,13 +1523,18 @@ body {
 
 .add-listing-card {
     background: var(--light-green-bg);
-    border: 2px dashed var(--dashed-border);
+    border: 2px dashed var(--primary-green);
     border-radius: 20px;
     padding: 50px 20px;
     text-align: center;
     margin-bottom: 40px;
     cursor: pointer;
     transition: all 0.2s;
+}
+
+body.dark-mode .add-listing-card {
+    background: var(--light-green-bg);
+    border-color: var(--primary-green);
 }
 
 .add-listing-card .upload {
@@ -1420,13 +1545,15 @@ body {
 
 .add-listing-card:hover {
     background: #d4e8e1;
-    border-color: var(--primary-green);
+}
+
+body.dark-mode .add-listing-card:hover {
+    background: #233a2e;
 }
 
 .add-listing-card h3 {
     font-family: 'Merriweather', serif;
     font-size: 20px;
-    color: var(--text-dark);
     margin-bottom: 5px;
 }
 
@@ -1452,13 +1579,6 @@ body {
     color: #fbbf24;
 }
 
-.inline-rating {
-    font-size: 12px;
-    margin-left: 6px;
-    color: #fbbf24;
-    font-weight: 600;
-}
-
 .rating-display {
     font-size: 13px;
     color: #fbbf24;
@@ -1466,16 +1586,10 @@ body {
     margin-top: 4px;
 }
 
-/* Responsive Styles */
 @media (max-width: 900px) {
-
     .hero-section {
         flex-direction: column;
         text-align: center;
-    }
-
-    .hero-btns {
-        justify-content: center;
     }
 
     .hero-image {
@@ -1483,10 +1597,7 @@ body {
         height: 300px;
     }
 
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .features-grid,
     .stats-grid,
     .food-grid,
     .steps-grid,
@@ -1498,15 +1609,7 @@ body {
         display: none;
     }
 
-    .logo {
-        font-size: 18px;
-    }
-
     .form-grid {
         grid-template-columns: 1fr;
-    }
-
-    .phone-input-group select {
-        flex: 0 0 40%;
     }
 }

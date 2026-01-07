@@ -1,4 +1,4 @@
-# 🍽️ Share Plate: Connecting Food to Those in Need
+# 🍽️ Share Plate: Connecting Food to Need
 ## Project Summary:
 
 Share Plate is a sustainability platform developed by Team Byte Force for COSMO HACK 1. It addresses the massive daily waste of edible food by restaurants and hostels by creating a centralized digital link to NGOs. The project aims to reduce food waste, cut methane emissions, and provide timely meals to vulnerable communities.
@@ -20,7 +20,6 @@ Share Plate is a sustainability platform developed by Team Byte Force for COSMO 
 Share Plate uses a modern web/mobile application architecture designed for scalability and low maintenance cost.
 
 - **Frontend:** HTML, CSS, JavaScript 
-- **Backend:** Node.js + server.js + Firebase
-- **Authentication:** Firebase Email Authentication
-- **Database:** Firebase Realtime DB
+- **Backend:** Node.js + Express / Firebase 
+- **Database:** Firebase Realtime DB / MongoDB Atlas 
 - **APIs:** Google Maps API for location and routing

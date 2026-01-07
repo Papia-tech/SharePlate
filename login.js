@@ -124,6 +124,7 @@ mainBtn.onclick = async () => {
             showSuccess("Account created successfully! Redirecting...");
 
             // === Set the LocalStorage key! ===
+            localStorage.setItem("userUid", user.uid);
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("loggedInUser", username);
             localStorage.setItem("loggedInRole", selectedRole);
@@ -153,6 +154,7 @@ mainBtn.onclick = async () => {
             showSuccess("Login successful! Redirecting...");
 
             // === Set the LocalStorage key! ===
+            localStorage.setItem("userUid", user.uid);
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("loggedInUser", user.displayName || email);
             localStorage.setItem("loggedInEmail", email);
